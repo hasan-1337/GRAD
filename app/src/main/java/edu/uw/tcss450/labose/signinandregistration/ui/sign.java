@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
+import com.auth0.android.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
+
+import static com.auth0.android.jwt.JWT.*;
 
 
 /**
