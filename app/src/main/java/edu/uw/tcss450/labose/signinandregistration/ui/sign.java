@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
-import com.auth0.android.jwt.JWT;
+import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 
@@ -60,7 +60,8 @@ public class sign extends Fragment {
 
         });
     }
-    private String generateJwt(final String email) {
+
+    private String generateJwt(final String name) {
         String token;
         try {
             Algorithm algorithm = Algorithm.HMAC256("secret key don't use a string literal in " +
