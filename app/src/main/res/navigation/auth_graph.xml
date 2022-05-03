@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_graph"
+    app:startDestination="@id/fragment_sign">
+
+    <fragment
+        android:id="@+id/fragment_sign"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.sign"
+        android:label="fragment_sign"
+        tools:layout="@layout/fragment_sign">
+        <action
+            android:id="@+id/action_fragment_sign_to_registration2"
+            app:destination="@id/registration" />
+        <action
+            android:id="@+id/action_fragment_sign_to_main_fragment"
+            app:destination="@id/main_fragment" />
+    </fragment>
+
+<!--    For some reason, this is not generating an ActionRegistrationToFragmentSign2 type we can use later -->
+    <fragment
+        android:id="@+id/registration"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.register.Registration"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_registration_to_fragment_sign2"
+            app:destination="@id/fragment_sign" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="edu.uw.tcss450.labose.signinandregistration.home.homeFragment"
+        android:label="activity_main"
+        tools:layout="@layout/fragment_home"/>
+
+
+
+</navigation>
