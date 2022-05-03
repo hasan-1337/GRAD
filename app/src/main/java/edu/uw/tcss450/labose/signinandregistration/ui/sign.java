@@ -49,12 +49,12 @@ public class sign extends Fragment {
         binding.buttonSignin.setOnClickListener(button -> {
 
             Navigation.findNavController(getView()).navigate(
-                    SignInFragmentDirections
+                    signDirections
                             .actionFragmentSignToMainFragment(
-                                    generateJwt(binding.editEmail.getText().toString())
+                                    generateJwt(binding.editName.getText().toString())
                             ));
 
-            FragmentSign
+
 
             //This tells the containing Activity that we are done with it.
             //It will not be added to backstack.

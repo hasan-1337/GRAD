@@ -41,7 +41,11 @@
         android:id="@+id/main_fragment"
         android:name="edu.uw.tcss450.labose.signinandregistration.home.homeFragment"
         android:label="activity_main"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name = "jwt"
+            app:argType="string" />
+    </fragment>
 
 
 
