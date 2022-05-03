@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSignBinding;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -24,8 +26,6 @@ import static com.auth0.android.jwt.JWT.*;
  * A simple {@link Fragment} subclass.
  */
 public class sign extends Fragment {
-
-    private Object SignInFragmentDirections;
 
     public sign() {
         // Required empty public constructor
@@ -43,17 +43,19 @@ public class sign extends Fragment {
 
         //Local access to the ViewBinding object. No need to create as Instance Var as it is only
         //used here.
-        FragmentSignInBinding binding = FragmentSignInBinding.bind(getView());
+        FragmentSignBinding binding = FragmentSignBinding.bind(getView());
 
         //On button click, navigate to MainActivity
         binding.buttonSignin.setOnClickListener(button -> {
 
             Navigation.findNavController(getView()).navigate(
                     SignInFragmentDirections
-                            .actionSignInFragmentToMainActivity(
+                            .actionFragmentSignToMainFragment(
                                     generateJwt(binding.editEmail.getText().toString())
-
                             ));
+
+            FragmentSign
+
             //This tells the containing Activity that we are done with it.
             //It will not be added to backstack.
             getActivity().finish();
