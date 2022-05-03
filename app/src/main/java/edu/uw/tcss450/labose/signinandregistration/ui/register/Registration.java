@@ -1,4 +1,4 @@
-package edu.uw.tcss450.labose.signinandregistration.ui;
+package edu.uw.tcss450.labose.signinandregistration.ui.register;
 
 import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.*;
 
