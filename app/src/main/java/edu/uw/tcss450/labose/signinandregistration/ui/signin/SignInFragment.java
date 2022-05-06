@@ -1,4 +1,4 @@
-package edu.uw.tcss450.labose.signinandregistration.ui;
+package edu.uw.tcss450.labose.signinandregistration.ui.signin;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSignBinding;
+import edu.uw.tcss450.labose.signinandregistration.ui.signin.SignInFragmentDirections;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -25,9 +26,9 @@ import static com.auth0.android.jwt.JWT.*;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class sign extends Fragment {
+public class SignInFragment extends Fragment {
 
-    public sign() {
+    public SignInFragment() {
         // Required empty public constructor
     }
 
@@ -49,7 +50,7 @@ public class sign extends Fragment {
         binding.buttonSignin.setOnClickListener(button -> {
 
             Navigation.findNavController(getView()).navigate(
-                    signDirections
+                    SignInFragmentDirections
                             .actionFragmentSignToMainFragment(
                                     generateJwt(binding.editName.getText().toString())
                             ));

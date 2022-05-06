@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_graph"
-    app:startDestination="@id/fragment_sign">
+    app:startDestination="@id/SignInFragment">
 
     <fragment
-        android:id="@+id/fragment_sign"
-        android:name="edu.uw.tcss450.labose.signinandregistration.ui.sign"
+        android:id="@+id/SignInFragment"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.signin.SignInFragment"
         android:label="fragment_sign"
         tools:layout="@layout/fragment_sign">
         <action
             android:id="@+id/action_fragment_sign_to_registration2"
-            app:destination="@id/registration" />
+            app:destination="@id/RegistrationFragment" />
         <action
             android:id="@+id/action_fragment_sign_to_main_fragment"
-            app:destination="@id/main_activity" />
+            app:destination="@id/MainActivity" />
         <argument
             android:name="email"
             app:argType="string"
@@ -27,17 +27,17 @@
     </fragment>
 
     <fragment
-        android:id="@+id/registration"
-        android:name="edu.uw.tcss450.labose.signinandregistration.ui.register.Registration"
+        android:id="@+id/RegistrationFragment"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registration_to_fragment_sign"
-            app:destination="@id/fragment_sign" />
+            app:destination="@id/SignInFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/main_activity"
+        android:id="@+id/MainActivity"
         android:name="edu.uw.tcss450.labose.signinandregistration.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/fragment_home">

@@ -23,7 +23,7 @@ import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Registration extends Fragment {
+public class RegistrationFragment extends Fragment {
     private FragmentRegistrationBinding binding;
 
     private RegistrationViewModel mRegisterModel;
@@ -42,7 +42,7 @@ public class Registration extends Fragment {
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
-    public Registration() {
+    public RegistrationFragment() {
         // Required empty public constructor
     }
 
@@ -124,8 +124,8 @@ public class Registration extends Fragment {
     }
 
     private void navigateToLogin() {
-        RegistrationDirections.ActionRegistrationToFragmentSign directions =
-                RegistrationDirections.actionRegistrationToFragmentSign();
+        edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.ActionRegistrationToFragmentSign directions =
+                edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.actionRegistrationToFragmentSign();
 
         directions.setEmail(binding.editEmail.getText().toString());
         directions.setPassword(binding.editPassword1.getText().toString());
