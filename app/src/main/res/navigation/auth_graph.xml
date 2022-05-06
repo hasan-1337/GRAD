@@ -15,7 +15,7 @@
             app:destination="@id/registration" />
         <action
             android:id="@+id/action_fragment_sign_to_main_fragment"
-            app:destination="@id/main_fragment" />
+            app:destination="@id/main_activity" />
         <argument
             android:name="email"
             app:argType="string"
@@ -26,7 +26,6 @@
             android:defaultValue="default" />
     </fragment>
 
-<!--    For some reason, this is not generating an ActionRegistrationToFragmentSign2 type we can use later -->
     <fragment
         android:id="@+id/registration"
         android:name="edu.uw.tcss450.labose.signinandregistration.ui.register.Registration"
@@ -38,8 +37,8 @@
     </fragment>
 
     <fragment
-        android:id="@+id/main_fragment"
-        android:name="edu.uw.tcss450.labose.signinandregistration.home.homeFragment"
+        android:id="@+id/main_activity"
+        android:name="edu.uw.tcss450.labose.signinandregistration.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/fragment_home">
         <argument
