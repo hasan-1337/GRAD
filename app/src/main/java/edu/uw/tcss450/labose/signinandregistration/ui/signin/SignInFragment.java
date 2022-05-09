@@ -108,7 +108,7 @@ public class SignInFragment extends Fragment {
     private void navigateToSuccess(final String email, final String jwt) {
         Navigation.findNavController(getView())
                 .navigate(SignInFragmentDirections
-                        .actionFragmentSignToMainFragment(email,jwt));
+                        .actionFragmentSignToMainActivity(email,jwt));
     }
 
     /**
