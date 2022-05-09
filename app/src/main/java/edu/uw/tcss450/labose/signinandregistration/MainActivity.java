@@ -1,6 +1,8 @@
 package edu.uw.tcss450.labose.signinandregistration;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 

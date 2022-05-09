@@ -1,4 +1,4 @@
-package edu.uw.tcss450.labose.signinandregistration.ui;
+package edu.uw.tcss450.labose.signinandregistration.ui.register;
 
 import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.*;
 
@@ -12,17 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentRegistrationBinding;
 import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Registration extends Fragment {
-    private FragmentRegisterBinding binding;
+public class RegistrationFragment extends Fragment {
+    private FragmentRegistrationBinding binding;
 
     private RegistrationViewModel mRegisterModel;
 
@@ -40,7 +42,7 @@ public class Registration extends Fragment {
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
-    public Registration() {
+    public RegistrationFragment() {
         // Required empty public constructor
     }
 
@@ -48,13 +50,13 @@ public class Registration extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mRegisterModel = new ViewModelProvider(getActivity())
-                .get(RegisterViewModel.class);
+                .get(RegistrationViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentRegisterBinding.inflate(inflater);
+        binding = FragmentRegistrationBinding.inflate(inflater);
         return binding.getRoot();
     }
 
@@ -122,14 +124,13 @@ public class Registration extends Fragment {
     }
 
     private void navigateToLogin() {
-        RegisterFragmentDirections.ActionRegisterFragmentToLoginFragment directions =
-                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
+        edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.ActionRegistrationToFragmentSign directions =
+                edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.actionRegistrationToFragmentSign();
 
         directions.setEmail(binding.editEmail.getText().toString());
         directions.setPassword(binding.editPassword1.getText().toString());
 
         Navigation.findNavController(getView()).navigate(directions);
-
     }
 
     /**

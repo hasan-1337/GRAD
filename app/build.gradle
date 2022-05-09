@@ -1,9 +1,11 @@
-plugins {
-    id 'com.android.application'
-}
+apply plugin: 'com.android.application'
 
 android {
     compileSdk 32
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "edu.uw.tcss450.labose.signinandregistration"
@@ -27,6 +29,14 @@ android {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs += 'build/generated/source/navigation-args'
+        }
+    }
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -35,6 +45,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.4.2'
     implementation 'androidx.navigation:navigation-ui:2.4.2'
+    apply plugin: "androidx.navigation.safeargs"
     implementation 'com.auth0.android:jwtdecode:2.0.0'
     implementation 'com.auth0:java-jwt:3.14.0'
     implementation 'com.android.volley:volley:1.2.1'
