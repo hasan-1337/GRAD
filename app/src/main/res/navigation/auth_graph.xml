@@ -14,7 +14,7 @@
             android:id="@+id/action_fragment_sign_to_registration2"
             app:destination="@id/RegistrationFragment" />
         <action
-            android:id="@+id/action_fragment_sign_to_main_fragment"
+            android:id="@+id/action_fragment_sign_to_main_activity"
             app:destination="@id/MainActivity" />
         <argument
             android:name="email"
@@ -36,15 +36,17 @@
             app:destination="@id/SignInFragment" />
     </fragment>
 
-    <fragment
+    <activity
         android:id="@+id/MainActivity"
         android:name="edu.uw.tcss450.labose.signinandregistration.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/fragment_home">
+        android:label="activity_main">
+        <argument
+            android:name="email"
+            app:argType="string" />
         <argument
             android:name = "jwt"
             app:argType="string" />
-    </fragment>
+    </activity>
 
 
 
