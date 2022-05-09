@@ -15,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
+
 
         new ViewModelProvider(this,
                 new userViewModel.userViewModelFactory(args.getEmail(), args.getJwt())
         ).get(userViewModel.class);
-
+         */
         setContentView(R.layout.activity_main);
 
     }
