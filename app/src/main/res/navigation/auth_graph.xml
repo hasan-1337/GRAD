@@ -42,6 +42,9 @@
         android:label="activity_main"
         tools:layout="@layout/fragment_home">
         <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
             android:name = "jwt"
             app:argType="string" />
     </fragment>
