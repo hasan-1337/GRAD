@@ -16,7 +16,9 @@ import androidx.core.app.NotificationCompat;
 import org.json.JSONException;
 
 import edu.uw.tcss450.labose.signinandregistration.AuthActivity;
+import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
+import me.pushy.sdk.Pushy;
 
 public class PushReceiver extends BroadcastReceiver {
 

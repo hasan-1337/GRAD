@@ -12,11 +12,10 @@
     <string name="hint_password_again">Retype Password</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_register_short">Register</string>
-
     <string name="title_chat">Chat</string>
 
-
-    <!-- TODO: Remove or change this placeholder text -->
-
+    <!-- TODO: Change these URLs to our server URL. -->
+    <string name="base_url_service">https://something.herokuapp.com/</string>
+    <string name="base_url_auth">https://something.herokuapp.com/</string>
 
 </resources>

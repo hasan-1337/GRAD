@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
 public class ChatViewModel  extends AndroidViewModel {

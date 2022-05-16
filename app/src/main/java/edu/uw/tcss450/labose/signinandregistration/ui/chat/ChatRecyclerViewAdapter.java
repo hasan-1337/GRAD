@@ -16,6 +16,7 @@ import com.google.android.material.shape.CornerFamily;
 
 import java.util.List;
 
+import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatMessageBinding;
 
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder> {
