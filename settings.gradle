@@ -1,0 +1,3 @@
+rootProject.name = "Signin and Registration"
+include ':app'
+include ':mylibrary'
