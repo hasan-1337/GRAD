@@ -10,6 +10,11 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
+        android:id="@+id/navigation_contacts"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.HomeFragment"
+        android:label="Contacts"
+        tools:layout="@layout/fragment_home" />
+    <fragment
         android:id="@+id/navigation_chat"
         android:name="edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatFragment"
         android:label="@string/title_chat"
