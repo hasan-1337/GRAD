@@ -14,8 +14,7 @@
     <string name="action_register_short">Register</string>
     <string name="title_chat">Chat</string>
 
-    <!-- TODO: Change these URLs to our server URL. -->
-    <string name="base_url_service">https://something.herokuapp.com/</string>
-    <string name="base_url_auth">https://something.herokuapp.com/</string>
+    <string name="base_url_service">https://team-2-tcss450-webservice.herokuapp.com/</string>
+    <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>
 
 </resources>
