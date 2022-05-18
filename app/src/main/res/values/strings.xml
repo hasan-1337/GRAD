@@ -17,4 +17,8 @@
     <string name="base_url_service">https://team-2-tcss450-webservice.herokuapp.com/</string>
     <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>
 
+    <string name="keys_json_contact_response">response</string>
+    <string name="keys_json_contact_data">data</string>
+    <string name="keys_json_contact_name">name</string>
+
 </resources>
