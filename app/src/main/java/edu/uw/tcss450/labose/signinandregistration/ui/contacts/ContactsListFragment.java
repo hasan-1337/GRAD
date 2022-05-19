@@ -9,22 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 
-public class ContactsFragment extends Fragment {
+public class ContactsListFragment extends Fragment {
 
-    private ContactsViewModel mModel;
+    private ContactsListViewModel mModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
+        mModel = new ViewModelProvider(getActivity()).get(ContactsListViewModel.class);
         mModel.connectGet();
     }
 

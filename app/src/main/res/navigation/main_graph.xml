@@ -11,9 +11,9 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_contacts"
-        android:name="edu.uw.tcss450.labose.signinandregistration.ui.HomeFragment"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.contacts.ContactsListFragment"
         android:label="Contacts"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_contacts" />
     <fragment
         android:id="@+id/navigation_chat"
         android:name="edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatFragment"

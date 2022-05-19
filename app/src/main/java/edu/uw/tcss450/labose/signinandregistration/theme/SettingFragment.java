@@ -45,7 +45,7 @@ public class SettingFragment extends Fragment {
 
         binding.buttonSettingsThemes.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(
-                        SettingFragmentDirections.actionNavigationSettingsToTheme();
+                        SettingFragmentDirections.actionNavigationSettingsToNavigationSettingsThemes2()
                 ));
 
     }
