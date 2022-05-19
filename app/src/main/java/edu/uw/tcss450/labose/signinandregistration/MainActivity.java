@@ -13,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -123,4 +125,5 @@ public class MainActivity extends AppCompatActivity {
             unregisterReceiver(mPushMessageReceiver);
         }
     }
+
 }

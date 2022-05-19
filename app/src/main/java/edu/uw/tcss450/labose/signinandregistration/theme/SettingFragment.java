@@ -17,7 +17,7 @@ import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentSettings extends Fragment {
+public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;
     private userViewModel viewModel;
@@ -45,7 +45,7 @@ public class FragmentSettings extends Fragment {
 
         binding.buttonSettingsThemes.setOnClickListener(button ->
                 Navigation.findNavController(getView()).navigate(
-                        SettingsFragmentDirections.actionNavigationSettingsToTheme()
+                        SettingFragmentDirections.actionNavigationSettingsToTheme();
                 ));
 
     }

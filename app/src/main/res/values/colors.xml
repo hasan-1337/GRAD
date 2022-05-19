@@ -2,9 +2,9 @@
 <resources>
     <!--    Added color variables to match required MaterialDesign themes-->
 
-    <color name="primaryColor">#4527a0</color>
+    <color name="primaryColor">#EFF79504</color>
     <color name="primaryLightColor">#7953d2</color>
-    <color name="primaryDarkColor">#000070</color>
+    <color name="primaryDarkColor">#B6D30909</color>
     <color name="secondaryColor">#b7a57a</color>
     <color name="secondaryLightColor">#ead6a9</color>
 

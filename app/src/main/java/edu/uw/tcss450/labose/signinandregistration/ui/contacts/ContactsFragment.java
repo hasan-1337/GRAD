@@ -42,10 +42,10 @@ public class ContactsFragment extends Fragment {
 
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             if(!contactList.isEmpty()) {
-                binding.listRoot.setAdapter(
+                binding.recyclerContacts.setAdapter(
                         new ContactsRecyclerViewAdapter(contactList)
                 );
-                binding.layoutWait.setVisibility(View.GONE);
+                binding.recyclerContacts.setVisibility(View.GONE);
             }
         });
     }

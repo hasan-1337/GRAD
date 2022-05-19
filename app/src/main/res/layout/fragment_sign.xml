@@ -17,6 +17,7 @@
         android:ems="10"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         android:text="uwnetid5@fake.email.com"
         app:layout_constraintBottom_toTopOf="@+id/guideline_fifty"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +29,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
+    <ImageView
+        android:id="@+id/image_login_graphic"
+        android:layout_width="108dp"
+        android:layout_height="117dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="101dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/edit_email"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/edit_password"
@@ -40,6 +50,7 @@
         android:hint="@string/hint_password"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         android:text="test5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,5 +77,6 @@
         android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
