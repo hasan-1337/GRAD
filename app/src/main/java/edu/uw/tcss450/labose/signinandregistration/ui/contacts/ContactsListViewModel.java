@@ -35,13 +35,16 @@ public class ContactsListViewModel extends AndroidViewModel {
 
     public ContactsListViewModel(@NonNull Application application) {
         super(application);
-        mContactList = new MutableLiveData<>();
-        mContactList.setValue(new ArrayList<ContactModel>());
+        mContactList = new MutableLiveData<>(new ArrayList<>());
     }
 
     public void addContactListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super List<ContactModel>> observer) {
         mContactList.observe(owner, observer);
+    }
+
+    public List<ContactModel> getContactModels() {
+        return mContactList.getValue();
     }
 
     private void handleError(final VolleyError error) {
@@ -83,14 +86,17 @@ public class ContactsListViewModel extends AndroidViewModel {
 //            Log.e("ERROR!", e.getMessage());
 //        }
         for (int i = 0; i < 5; i++) {
-            ContactModel contact = new ContactModel();
-            contact.setEmail("contact " + i);
+            ContactModel contact = new ContactModel("contact " + i);
             mContactList.getValue().add(contact);
+            Log.e("for loop", mContactList.getValue().get(i).getEmail());
         }
 
         Log.e("test", "made it here 1");
 
+        Log.e("after for", mContactList.getValue().get(0).getEmail());
+
         mContactList.setValue(mContactList.getValue());
+
     }
 
     public void connectGet() {

@@ -1,14 +1,14 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.contacts;
 
-public class ContactModel {
+import java.io.Serializable;
+
+public class ContactModel implements Serializable {
     String email;
+
+    public ContactModel(String email) { this.email = email; }
 
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
 }

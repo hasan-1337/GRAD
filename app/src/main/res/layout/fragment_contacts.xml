@@ -9,10 +9,13 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_contacts"
-        android:name="edu.uw.tcss450.labose.signinandregistration.ui.contacts.ContactModel"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="edu.uw.tcss450.labose.signinandregistration.ui.contacts.ContactsListFragment"
-        tools:listitem="@layout/item_contact"/>
+        android:orientation="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="edu.uw.tcss450.uiandnavigationlab.ui.blog.BlogListFragment"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        tools:listitem="@layout/item_contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

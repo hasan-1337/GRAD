@@ -19,6 +19,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
     public ContactsRecyclerViewAdapter(List<ContactModel> items) {
         this.mContacts = items;
+        notifyDataSetChanged();
     }
 
     @NonNull
