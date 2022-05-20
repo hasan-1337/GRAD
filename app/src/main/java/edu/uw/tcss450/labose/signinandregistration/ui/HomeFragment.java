@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
         userViewModel model = new ViewModelProvider(getActivity())
                 .get(userViewModel.class);
 
-        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
+//        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
     }
 }
 
