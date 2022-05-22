@@ -47,27 +47,16 @@ public class ContactsListFragment extends Fragment {
 
         ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
 
-//        for (int i = 0; i < 5; i++) {
-//            ContactModel model = new ContactModel("Contact " + i);
-//            arrayList.add(model);
-//        }
-
         // Set the adapter to hold a ref to the list.
         rv.setAdapter(new ContactsRecyclerViewAdapter(arrayList));
         rv.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        mModel.addContactListObserver(getViewLifecycleOwner(), list -> {
-            rv.getAdapter().notifyDataSetChanged();
-            rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
+        mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
+            if(!contactList.isEmpty()) {
+                binding.recyclerContacts.setAdapter(
+                        new ContactsRecyclerViewAdapter(contactList)
+                );
+            }
         });
-
-//        mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
-//            if(!contactList.isEmpty()) {
-//                binding.recyclerContacts.setAdapter(
-//                        new ContactsRecyclerViewAdapter(contactList)
-//                );
-//                binding.recyclerContacts.setVisibility(View.GONE);
-//            }
-//        });
     }
 }
