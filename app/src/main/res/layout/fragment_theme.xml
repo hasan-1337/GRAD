@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- text view for displaying the selected theme -->
+    <TextView android:id="@+id/tv_Theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/hint_themes"
+        android:textAlignment="center" android:textSize="20sp"/>
+    <!-- radio group for switching theme -->
+    <RadioGroup android:id="@+id/idRGgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Theme"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:padding="4dp">
+        <!-- radio button for light theme -->
+        <RadioButton android:id="@+id/button_theme_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:minHeight="48dp"
+            android:padding="5dp"
+            android:text="@string/action_themes_light"/>
+        <!-- radio button for dark theme -->
+        <RadioButton android:id="@+id/button_theme_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:padding="5dp"
+            android:text="@string/action_themes_dark"/>
+    </RadioGroup>
+</RelativeLayout>

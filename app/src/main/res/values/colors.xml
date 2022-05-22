@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    Added color variables to match required MaterialDesign themes-->
+
+    <color name="primaryColor">#EFF79504</color>
+    <color name="primaryLightColor">#7953d2</color>
+    <color name="primaryDarkColor">#B6D30909</color>
+    <color name="secondaryColor">#b7a57a</color>
+    <color name="secondaryLightColor">#ead6a9</color>
+
+    <color name="secondaryTextColorFade">#222222</color>
+
+    <color name="colorPrimary">@color/primaryColor</color>
+    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
+    <color name="colorAccent">@color/secondaryColor</color>
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/drawable/ic_contact_grey_80.xml" value="0.2305" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_chat_message.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_contacts.xml" value="0.1782178217821782" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_home.xml" value="0.2890625" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_registration.xml" value="0.5110896817743491" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_setting.xml" value="0.6848934198331789" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/fragment_theme.xml" value="0.6848934198331789" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/layout/item_contact.xml" value="0.72" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.33980582524271846" />
+        <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450/app/src/main/res/layout/activity_main.xml" value="0.8663366336633663" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_sign.xml" value="0.19114583333333332" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
