@@ -61,7 +61,6 @@
             android:layout_height="36dp"
             android:layout_marginBottom="10dp"
             android:background="#F5A023"
-            android:onClick="getWeatherDetails"
             android:text="Get weather forecast"
             android:textColor="@android:color/white"
             app:backgroundTint="@null"
