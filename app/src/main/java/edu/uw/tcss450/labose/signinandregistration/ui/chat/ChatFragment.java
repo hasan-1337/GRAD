@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBinding;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +25,7 @@ public class ChatFragment extends Fragment {
     private static final int HARD_CODED_CHAT_ID = 1;
 
     private ChatViewModel mChatModel;
-    private userViewModel mUserModel;
+    private UserViewModel mUserModel;
     private ChatSendViewModel mSendModel;
 
 
@@ -37,7 +37,7 @@ public class ChatFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
-        mUserModel = provider.get(userViewModel.class);
+        mUserModel = provider.get(UserViewModel.class);
         mChatModel = provider.get(ChatViewModel.class);
         mChatModel.getFirstMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
         mSendModel = provider.get(ChatSendViewModel.class);

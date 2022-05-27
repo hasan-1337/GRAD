@@ -5,11 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class userViewModel extends ViewModel {
+public class UserViewModel extends ViewModel {
     private final String mEmail;
     private final String mJwt;
 
-    private userViewModel(String email, String jwt) {
+    private UserViewModel(String email, String jwt) {
         mEmail = email;
         mJwt = jwt;
     }
@@ -35,11 +35,11 @@ public class userViewModel extends ViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            if (modelClass == userViewModel.class) {
-                return (T) new userViewModel(name, jwt);
+            if (modelClass == UserViewModel.class) {
+                return (T) new UserViewModel(name, jwt);
             }
             throw new IllegalArgumentException(
-                    "Argument must be: " + userViewModel.class);
+                    "Argument must be: " + UserViewModel.class);
         }
     }
 }

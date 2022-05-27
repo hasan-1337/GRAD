@@ -10,9 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import org.jetbrains.annotations.Nullable;
-import com.google.android.material.badge.BadgeUtils;
+
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingBinding;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +20,7 @@ import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
 public class SettingFragment extends Fragment {
 
     private FragmentSettingBinding binding;
-    private userViewModel viewModel;
+    private UserViewModel viewModel;
 
 
 
@@ -35,7 +35,7 @@ public class SettingFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSettingBinding.inflate(inflater);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
-        viewModel = provider.get(userViewModel.class);
+        viewModel = provider.get(UserViewModel.class);
         return binding.getRoot();
     }
 

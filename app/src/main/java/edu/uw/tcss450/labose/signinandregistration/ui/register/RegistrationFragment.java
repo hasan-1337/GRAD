@@ -21,19 +21,19 @@ import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentRegistrat
 import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass, for registering new users.
  */
 public class RegistrationFragment extends Fragment {
-    private FragmentRegistrationBinding binding;
 
+    //Binding and ViewModel fields
+    private FragmentRegistrationBinding binding;
     private RegistrationViewModel mRegisterModel;
 
+    //Password validation fields
     private PasswordValidator mNameValidator = checkPwdLength(1);
-
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-
     private PasswordValidator mPassWordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.editPassword2.getText().toString()))
                     .and(checkPwdLength(7))
@@ -42,10 +42,18 @@ public class RegistrationFragment extends Fragment {
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
 
+    /**
+     * Required empty public constructor for the class.
+     */
     public RegistrationFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * onCreate method for the fragment.
+     *
+     * @param savedInstanceState Instance state to restore.
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +61,14 @@ public class RegistrationFragment extends Fragment {
                 .get(RegistrationViewModel.class);
     }
 
+    /**
+     * onCreateView method for the fragment.
+     *
+     * @param inflater LayoutInflater for the fragment.
+     * @param container ViewGroup for the fragment.
+     * @param savedInstanceState Instance state to restore.
+     * @return The fragment's view.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +76,11 @@ public class RegistrationFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /**
+     * onViewCreated method for the fragment.
+     * @param view The fragment's view.
+     * @param savedInstanceState Instance state to restore.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -69,10 +90,17 @@ public class RegistrationFragment extends Fragment {
                 this::observeResponse);
     }
 
+    /**
+     * Attempts to register the account.
+     * @param button The registration button.
+     */
     private void attemptRegister(final View button) {
         validateFirst();
     }
 
+    /**
+     * Validates the new user's First Name.
+     */
     private void validateFirst() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editFirst.getText().toString().trim()),
@@ -80,6 +108,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editFirst.setError("Please enter a first name."));
     }
 
+    /**
+     * Validates the new user's Last Name.
+     */
     private void validateLast() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editLast.getText().toString().trim()),
@@ -87,6 +118,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editLast.setError("Please enter a last name."));
     }
 
+    /**
+     * Validates the new user's Email.
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -94,6 +128,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editEmail.setError("Please enter a valid Email address."));
     }
 
+    /**
+     * Validates that the new user's passwords match.
+     */
     private void validatePasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
@@ -105,6 +142,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editPassword1.setError("Passwords must match."));
     }
 
+    /**
+     * Validates the new user's password.
+     */
     private void validatePassword() {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(binding.editPassword1.getText().toString()),
@@ -112,6 +152,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editPassword1.setError("Please enter a valid Password."));
     }
 
+    /**
+     * Asynchronous call that sends the registration info to the server via {@link RegistrationViewModel}.
+     */
     private void verifyAuthWithServer() {
         mRegisterModel.connect(
                 binding.editFirst.getText().toString(),
@@ -123,6 +166,9 @@ public class RegistrationFragment extends Fragment {
 
     }
 
+    /**
+     * Navigates to the login screen upon successful registration of a new user with the server.
+     */
     private void navigateToLogin() {
         edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.ActionRegistrationToFragmentSign directions =
                 edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.actionRegistrationToFragmentSign();
@@ -135,7 +181,7 @@ public class RegistrationFragment extends Fragment {
 
     /**
      * An observer on the HTTP Response from the web server. This observer should be
-     * attached to SignInViewModel.
+     * attached to RegistrationViewModel.
      *
      * @param response the Response from the server
      */
