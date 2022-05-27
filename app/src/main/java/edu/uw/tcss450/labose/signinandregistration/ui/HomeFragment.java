@@ -20,12 +20,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.util.NumberUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentHomeBinding;
@@ -37,12 +39,14 @@ import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding mBinding;
+    private static String hourly;
+    private static String current;
+    private static String daily;
     private static final DecimalFormat df = new DecimalFormat("#.#");
 
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,12 +63,11 @@ public class HomeFragment extends Fragment {
                 .get(userViewModel.class);
 
         mBinding = FragmentHomeBinding.bind(getView());
-
+        mBinding.hourlyWeather.setText(hourly);
+        mBinding.currentWeather.setText(current);
+        mBinding.tvResult.setText(daily);
         mBinding.btnGet.setOnClickListener(this::getWeatherDetails);
-
-//        FragmentHomeBinding.bind(getView()).textHello.setText("Hello " + model.getEmail());
     }
-
 
     public void getWeatherDetails(View view) {
         String tempUrl;
@@ -72,7 +75,21 @@ public class HomeFragment extends Fragment {
         if(city.equals("")){ // if nothing is typed
             mBinding.tvResult.setText("City field can not be empty!");
         }else{
-            tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            boolean bZipcode = false;
+
+            try { // Check if it's a zipcode or city name
+                int d = Integer.parseInt(city);
+                bZipcode = true;
+            } catch (final NumberFormatException nfe) {
+                bZipcode = false;
+            }
+
+            if (bZipcode) {
+                tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            } else {
+                tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&city=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            }
+
             // request the JSON information
             StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
                 StringBuilder output = new StringBuilder();
@@ -88,7 +105,8 @@ public class HomeFragment extends Fragment {
                         String clouds = jsonobject.getString("clouds");
                         output.append(" Day ").append(i + 1).append("\n").append(df.format(temp)).append(" °F").append("\n Humidity: ").append(humidity).append("%").append("\n Wind Speed: ").append(df.format(wind)).append(" mph").append("\n Cloudiness: ").append(clouds).append("%\n\n");
                     }
-                    mBinding.tvResult.setText(output.toString()); // Fill up the textview with the weather data
+                    daily = output.toString();
+                    mBinding.tvResult.setText(daily); // Fill up the textview with the weather data
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -96,7 +114,12 @@ public class HomeFragment extends Fragment {
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
             requestQueue.add(stringRequest);
 
-            tempUrl = "https://api.weatherbit.io/v2.0/current?city=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            if (bZipcode) {
+                tempUrl = "https://api.weatherbit.io/v2.0/current?postal_code=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            } else {
+                tempUrl = "https://api.weatherbit.io/v2.0/current?city=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            }
+
             // Resend the request to retrieve the current forecast.
             stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
                 String output = "";
@@ -116,7 +139,8 @@ public class HomeFragment extends Fragment {
                             + "\n\n Humidity: " + humidity + "%"
                             + "\n Wind Speed: " + df.format(wind) + " mph"
                             + "\n Cloudiness: " + clouds + "%\n\n";
-                    mBinding.currentWeather.setText(output); // Fill up the textview with the weather data
+                    current = output;
+                    mBinding.currentWeather.setText(current); // Fill up the textview with the weather data
 
                     LinearLayout layout = mBinding.background;
                     if (temp > 35) {
@@ -135,7 +159,12 @@ public class HomeFragment extends Fragment {
             requestQueue = Volley.newRequestQueue(getActivity());
             requestQueue.add(stringRequest);
 
-            tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?city=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            if (bZipcode) {
+                tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?postal_code=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            } else {
+                tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?city=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+            }
+
             // Resend the request to retrieve the current forecast.
             stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
                 StringBuilder output = new StringBuilder();
@@ -159,7 +188,8 @@ public class HomeFragment extends Fragment {
 
                         output2.append(df.format(temp)).append(String.format("%-8s", " °F"));
                     }
-                    mBinding.hourlyWeather.setText(output + "\n" + output2); // Fill up the textview with the weather data
+                    hourly = output + "\n" + output2;
+                    mBinding.hourlyWeather.setText(hourly); // Fill up the textview with the weather data
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
