@@ -30,6 +30,11 @@
             app:destination="@id/navigation_settings_themes" />
     </fragment>
     <fragment
+        android:id="@+id/navigation_weather"
+        android:name="edu.uw.tcss450.labose.signinandregistration.ui.WeatherFragment"
+        android:label="@string/title_weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
         android:id="@+id/navigation_settings_themes"
         android:name="edu.uw.tcss450.labose.signinandregistration.theme.ThemeFragment"
         android:label="fragment_theme"

@@ -20,6 +20,8 @@
 
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="title_weather">Weather</string>
 
     <string name="base_url_service">https://team-2-tcss450-webservice.herokuapp.com/</string>
     <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>

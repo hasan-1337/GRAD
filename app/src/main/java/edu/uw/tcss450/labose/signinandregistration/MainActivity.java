@@ -63,9 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
-        new ViewModelProvider(this,
-                new userViewModel.userViewModelFactory(args.getEmail(), args.getJwt())
-        ).get(userViewModel.class);
+        new ViewModelProvider(this, new userViewModel.userViewModelFactory(args.getEmail(), args.getJwt())).get(userViewModel.class);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -73,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_chat)
-                .build();
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_home, R.id.navigation_contacts, R.id.navigation_chat, R.id.navigation_weather).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
