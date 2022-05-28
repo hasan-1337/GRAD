@@ -79,9 +79,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         String tempUrl;
         String city = mBinding.etCity.getText().toString().trim();
 
-        if(city.equals("")){ // if nothing is typed
-            mBinding.tvResult.setText(R.string.weather_invalid);
-        }else{
+        if (city.length() > 0) {
             boolean bZipcode;
 
             try { // Check if it's a zipcode or city name
