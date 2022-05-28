@@ -14,7 +14,7 @@ import edu.uw.tcss450.labose.signinandregistration.R;
 public class HomeFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 }

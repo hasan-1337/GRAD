@@ -49,15 +49,13 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
     private static final DecimalFormat df = new DecimalFormat("#.#");
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_weather, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mBinding = FragmentWeatherBinding.bind(getView());
@@ -70,14 +68,13 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
             mBinding.background.setBackgroundResource((Integer) background);
         }
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        final SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 
     public void getWeatherDetails(final View view) {
-        String tempUrl;
-        String city = mBinding.etCity.getText().toString().trim();
+        final String city = mBinding.etCity.getText().toString().trim();
 
         if (city.length() > 0) {
             boolean bZipcode;
@@ -90,49 +87,46 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
             }
 
             if (bZipcode) {
-                tempUrl = "https://api.weatherbit.io/v2.0/current?postal_code=" + city + "&country=US&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherCurrent("https://api.weatherbit.io/v2.0/current?postal_code=" + city + "&country=US&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             } else {
-                tempUrl = "https://api.weatherbit.io/v2.0/current?city=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherCurrent("https://api.weatherbit.io/v2.0/current?city=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             }
-            getWeatherCurrent(tempUrl);
 
             if (bZipcode) {
-                tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?postal_code=" + city + "&country=US&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?postal_code=" + city + "&country=US&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             } else {
-                tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?city=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?city=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             }
-            getWeatherHourly(tempUrl);
 
             if (bZipcode) {
-                tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             } else {
-                tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?&city=" + city + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&city=" + city + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             }
-            getWeatherDaily(tempUrl);
         }
     }
 
-    private void getWeatherCurrent(final String tempUrl) {
+    private void getWeatherCurrent(final String url) {
         // Resend the request to retrieve the current forecast.
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-            String output = "";
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            final StringBuilder output = new StringBuilder();
 
             try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONArray jsonArray = jsonResponse.getJSONArray("data");
-                JSONObject jsonobject = jsonArray.getJSONObject(0);
-                double temp = jsonobject.getDouble("temp");
-                int humidity = jsonobject.getInt("rh");
-                double wind = jsonobject.getDouble("wind_spd");
-                int clouds = jsonobject.getInt("clouds");
-                String state = jsonobject.getString("city_name");
-                String countryCode = jsonobject.getString("country_code");
-                output += " Current Forecast in\n" + state + " (" + countryCode + ")"
-                        + "\n" + df.format(temp) + " °F"
-                        + "\n\n Humidity: " + humidity + "%"
-                        + "\n Wind Speed: " + df.format(wind) + " mph"
-                        + "\n Cloudiness: " + clouds + "%\n\n";
-                current = output;
+                final JSONObject jsonResponse = new JSONObject(response);
+                final JSONArray jsonArray = jsonResponse.getJSONArray("data");
+                final JSONObject jsonobject = jsonArray.getJSONObject(0);
+                final double temp = jsonobject.getDouble("temp");
+                final int humidity = jsonobject.getInt("rh");
+                final double wind = jsonobject.getDouble("wind_spd");
+                final int clouds = jsonobject.getInt("clouds");
+                final String state = jsonobject.getString("city_name");
+                final String countryCode = jsonobject.getString("country_code");
+                output.append(" Current Forecast in\n").append(state).append(" (").
+                        append(countryCode).append(")").append("\n").append(df.format(temp)).
+                        append(" °F").append("\n\n Humidity: ").append(humidity).append("%").
+                        append("\n Wind Speed: ").append(df.format(wind)).append(" mph").
+                        append("\n Cloudiness: ").append(clouds).append("%\n\n");
+                current = output.toString();
                 mBinding.currentWeather.setText(current); // Fill up the textview with the weather data
 
                 if (temp > 35) {
@@ -146,29 +140,29 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
 
                 mBinding.background.setBackgroundResource((Integer) background);
-            } catch (JSONException e) {
+            } catch (final JSONException e) {
                 e.printStackTrace();
             }
         }, error -> Toast.makeText(getActivity(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
 
-    private void getWeatherHourly(final String tempUrl) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-            StringBuilder output = new StringBuilder();
-            StringBuilder output2 = new StringBuilder();
+    private void getWeatherHourly(final String url) {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            final StringBuilder output = new StringBuilder();
+            final StringBuilder output2 = new StringBuilder();
             try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONArray jsonArray = jsonResponse.getJSONArray("data");
+                final JSONObject jsonResponse = new JSONObject(response);
+                final JSONArray jsonArray = jsonResponse.getJSONArray("data");
                 output.append(String.format("%-4s", ""));
 
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonobject = jsonArray.getJSONObject(i);
-                    double temp = jsonobject.getDouble("temp");
-                    String time = jsonobject.getString("timestamp_local");
-                    int t = Integer.parseInt(time.substring(11, 13));
-                    String x = "" + ((t % 12 == 0)? 12:t % 12);
+                    final JSONObject jsonobject = jsonArray.getJSONObject(i);
+                    final double temp = jsonobject.getDouble("temp");
+                    final String time = jsonobject.getString("timestamp_local");
+                    final int t = Integer.parseInt(time.substring(11, 13));
+                    final String x = "" + ((t % 12 == 0)? 12:t % 12);
                     if (t % 12 == t) {
                         output.append(String.format("%-11s", x + " AM"));
                     } else {
@@ -179,43 +173,43 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
                 hourly = output + "\n" + output2;
                 mBinding.hourlyWeather.setText(hourly); // Fill up the textview with the weather data
-            } catch (JSONException e) {
+            } catch (final JSONException e) {
                 e.printStackTrace();
             }
         }, error -> Toast.makeText(getActivity(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
 
-    private void getWeatherDaily(final String tempUrl) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-            StringBuilder output = new StringBuilder();
+    private void getWeatherDaily(final String url) {
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
+            final StringBuilder output = new StringBuilder();
 
             try {
-                JSONObject jsonResponse = new JSONObject(response);
-                JSONArray jsonArray = jsonResponse.getJSONArray("data");
+                final JSONObject jsonResponse = new JSONObject(response);
+                final JSONArray jsonArray = jsonResponse.getJSONArray("data");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     final JSONObject jsonobject = jsonArray.getJSONObject(i);
-                    double temp = jsonobject.getDouble("temp");
-                    int humidity = jsonobject.getInt("rh");
-                    double wind = jsonobject.getDouble("wind_spd");
-                    String clouds = jsonobject.getString("clouds");
+                    final double temp = jsonobject.getDouble("temp");
+                    final int humidity = jsonobject.getInt("rh");
+                    final double wind = jsonobject.getDouble("wind_spd");
+                    final String clouds = jsonobject.getString("clouds");
                     output.append(" Day ").append(i + 1).append("\n").append(df.format(temp)).append(" °F")
                             .append("\n Humidity: ").append(humidity).append("%").append("\n Wind Speed: ")
                             .append(df.format(wind)).append(" mph").append("\n Cloudiness: ").append(clouds).append("%\n\n");
                 }
                 daily = output.toString();
                 mBinding.tvResult.setText(daily); // Fill up the textview with the weather data
-            } catch (JSONException e) {
+            } catch (final JSONException e) {
                 e.printStackTrace();
             }
         }, error -> Toast.makeText(getActivity(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        final RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(stringRequest);
     }
 
     @Override
-    public void onMapClick(@NonNull LatLng latLng) {
+    public void onMapClick(final @NonNull LatLng latLng) {
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, mMap.getCameraPosition().zoom));
@@ -227,12 +221,12 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
 
     @SuppressLint("MissingPermission")
     @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+    public void onMapReady(final @NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        LocationViewModel model = new ViewModelProvider(getActivity())
-                .get(LocationViewModel.class);
+        final LocationViewModel model = new ViewModelProvider(getActivity()).get(LocationViewModel.class);
+
         model.addLocationObserver(getViewLifecycleOwner(), location -> {
-            if(location != null) {
+            if (location != null) {
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
                 googleMap.setMyLocationEnabled(true);
 
