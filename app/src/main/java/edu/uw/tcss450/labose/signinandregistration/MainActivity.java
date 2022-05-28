@@ -1,6 +1,8 @@
 package edu.uw.tcss450.labose.signinandregistration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -8,33 +10,22 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.DecimalFormat;
-
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
+import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
 import edu.uw.tcss450.labose.signinandregistration.services.PushReceiver;
@@ -48,7 +39,23 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
-    private final DecimalFormat df = new DecimalFormat("#.#");
+
+    /**
+     * The desired interval for location updates. Inexact. Updates may be more or less frequent.
+     */
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    /**
+     * The fastest rate for active location updates. Exact. Updates will never be more frequent
+     * than this value.
+     */
+    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+    // A constant int for the permissions request code. Must be a 16 bit number
+    private static final int MY_PERMISSIONS_LOCATIONS = 8414;
+    private com.google.android.gms.location.LocationRequest mLocationRequest;
+    //Use a FusedLocationProviderClient to request the location
+    private FusedLocationProviderClient mFusedLocationClient;
+    //The ViewModel that will store the current location
+    private LocationViewModel mLocationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,21 @@ public class MainActivity extends AppCompatActivity {
                 badge.setVisible(false);
             }
         });
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION
+                            , Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_LOCATIONS);
+        } else {
+            //The user has already allowed the use of Locations. Get the current location.
+            requestLocation();
+        }
+        createLocationRequest();
     }
 
     private class MainPushMessageReceiver extends BroadcastReceiver {
@@ -141,5 +163,60 @@ public class MainActivity extends AppCompatActivity {
             unregisterReceiver(mPushMessageReceiver);
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        // If request is cancelled, the result arrays are empty.
+        if (requestCode == MY_PERMISSIONS_LOCATIONS) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission was granted, yay! Do the
+                // locations-related task you need to do.
+                requestLocation();
+            } else {
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+                Log.d("PERMISSION DENIED", "Nothing to see or do here.");
 
+                //Shut down the app. In production release, you would let the user
+                //know why the app is shutting down...maybe ask for permission again?
+                finishAndRemoveTask();
+            }
+        }
+    }
+    private void requestLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.d("REQUEST LOCATION", "User did NOT allow permission to request location!");
+        } else {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    Log.d("LOCATION", location.toString());
+                    if (mLocationModel == null) {
+                        mLocationModel = new ViewModelProvider(MainActivity.this)
+                                .get(LocationViewModel.class);
+                    }
+                    mLocationModel.setLocation(location);
+                }
+            });
+        }
+    }
+    /**
+     * Create and configure a Location Request used when retrieving location updates
+     */
+    private void createLocationRequest() {
+        mLocationRequest = com.google.android.gms.location.LocationRequest.create();
+        // Sets the desired interval for active location updates. This interval is
+        // inexact. You may not receive updates at all if no location sources are available, or
+        // you may receive them slower than requested. You may also receive updates faster than
+        // requested if other applications are requesting location at a faster interval.
+        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        // Sets the fastest rate for active location updates. This interval is exact, and your
+        // application will never receive updates faster than this value.
+        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
 }

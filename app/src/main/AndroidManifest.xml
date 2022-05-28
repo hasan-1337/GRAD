@@ -2,12 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.uw.tcss450.labose.signinandregistration">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Pushy Permissions -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Pushy Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- End Pushy Permissions -->
 
     <application
         android:allowBackup="true"
@@ -17,67 +21,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp">
 
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyBBdVmPOgncP7hBOOFrfutdp2ehuFnKwL0" />
 
-        <activity android:name=".MainActivity" />
-        <activity
-            android:name=".AuthActivity"
+        <activity android:name="edu.uw.tcss450.labose.signinandregistration.MainActivity" />
+        <activity android:name="edu.uw.tcss450.labose.signinandregistration.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Pushy Declarations -->
+        </activity>
+
+        <!-- Pushy Declarations -->
         <!-- Pushy Notification Receiver -->
         <!-- Incoming push notifications will invoke the following BroadcastReceiver -->
-        <receiver
-            android:name=".services.PushReceiver"
-            android:exported="false">
+        <receiver android:name="edu.uw.tcss450.labose.signinandregistration.services.PushReceiver" android:exported="false">
             <intent-filter>
-
                 <!-- Do not modify this -->
                 <action android:name="pushy.me" />
             </intent-filter>
-        </receiver> <!-- Pushy Update Receiver -->
+        </receiver>
+
+        <!-- Pushy Update Receiver -->
         <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver
-            android:name="me.pushy.sdk.receivers.PushyUpdateReceiver"
-            android:exported="false">
+        <receiver android:name="me.pushy.sdk.receivers.PushyUpdateReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
-        </receiver> <!-- Pushy Boot Receiver -->
+        </receiver>
+
+        <!-- Pushy Boot Receiver -->
         <!-- Do not modify - internal BroadcastReceiver that restarts the listener service -->
-        <receiver
-            android:name="me.pushy.sdk.receivers.PushyBootReceiver"
-            android:exported="false">
+        <receiver android:name="me.pushy.sdk.receivers.PushyBootReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver> <!-- Pushy Socket Service -->
-        <!-- Do not modify - internal service -->
-        <service
-            android:name="me.pushy.sdk.services.PushySocketService"
-            android:stopWithTask="false" /> <!-- Pushy Job Service (added in Pushy SDK 1.0.35) -->
-        <!-- Do not modify - internal service -->
-        <service
-            android:name="me.pushy.sdk.services.PushyJobService"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-    </application>
+        </receiver>
 
+        <!-- Pushy Socket Service -->
+        <!-- Do not modify - internal service -->
+        <service android:name="me.pushy.sdk.services.PushySocketService"/>
+
+        <!-- Pushy Job Service (added in Pushy SDK 1.0.35) -->
+        <!-- Do not modify - internal service -->
+        <service android:name="me.pushy.sdk.services.PushyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true" />
+    </application>
 </manifest>

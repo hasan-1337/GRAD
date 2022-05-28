@@ -12,34 +12,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="665dp"
+        android:layout_height="703dp"
         android:gravity="center"
         android:orientation="vertical"
         tools:ignore="UselessParent">
 
-        <TextView
-            android:id="@+id/currentWeather"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="177dp"
-            android:gravity="center"
-            android:textColor="#F5A023"
-            android:textSize="20sp"
-            android:background="#314C4C4C"
-            android:textStyle="bold|italic" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="45dp">
-
-            <TextView
-                android:id="@+id/hourlyWeather"
-                android:background="#314C4C4C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#F5A023"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
-        </HorizontalScrollView>
+            android:layout_height="146dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/etCity"
@@ -49,26 +36,50 @@
             android:autofillHints=""
             android:ems="10"
             android:gravity="center"
-            android:hint="Enter City Name or Zip Code"
+            android:hint="@string/weather_input"
             android:inputType="textPersonName"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnGet"
             android:layout_width="match_parent"
-            android:layout_height="36dp"
+            android:layout_height="35dp"
             android:layout_marginBottom="10dp"
             android:background="#F5A023"
-            android:text="Get weather forecast"
+            android:text="@string/weather_button"
             android:textColor="@android:color/white"
             app:backgroundTint="@null"
             tools:ignore="UsingOnClickInXml" />
 
+        <TextView
+            android:id="@+id/currentWeather"
+            android:layout_width="match_parent"
+            android:layout_height="167dp"
+            android:background="#314C4C4C"
+            android:gravity="center"
+            android:textColor="#F5A023"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+            <TextView
+                android:id="@+id/hourlyWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#314C4C4C"
+                android:textColor="#F5A023"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+        </HorizontalScrollView>
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="308dp">
+            android:layout_height="225dp">
 
             <TextView
                 android:id="@+id/tvResult"

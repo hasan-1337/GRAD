@@ -14,6 +14,9 @@
     <string name="action_register_short">Register</string>
     <string name="action_themes_light">Light</string>
     <string name="action_themes_dark">Dark</string>
+    <string name="weather_input">Enter City Name or Zip Code</string>
+    <string name="weather_button">Get weather forecast</string>
+    <string name="weather_invalid">City field can not be empty!</string>
 
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
