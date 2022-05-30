@@ -18,12 +18,14 @@
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
 
-    <string name="base_url_service">https://team-2-tcss450-webservice.herokuapp.com/</string>
+    <string name="base_url_service">https://team-2-tcss450-server-m-c.herokuapp.com/</string>
     <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>
 
     <string name="keys_json_contact_response">response</string>
     <string name="keys_json_contact_data">data</string>
     <string name="keys_json_contact_name">name</string>
+    <string name="keys_json_contact_email">email</string>
+    <string name="keys_json_contact_id">id</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

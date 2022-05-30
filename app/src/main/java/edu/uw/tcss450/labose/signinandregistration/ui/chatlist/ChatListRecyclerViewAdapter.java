@@ -12,8 +12,7 @@ import java.util.List;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.ItemContactBinding;
 
-public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ContactViewHolder>{
-
+public class ChatListRecyclerViewAdapter { //extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ContactViewHolder>{
 //    //Store all contacts to present
 //    private final List<ChatModel> mContacts;
 //

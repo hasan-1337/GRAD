@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChatListViewModel extends AndroidViewModel {
+public class ChatListViewModel { //extends AndroidViewModel {
 
 ////    FragmentContactsBinding mBinding;
 ////    ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
