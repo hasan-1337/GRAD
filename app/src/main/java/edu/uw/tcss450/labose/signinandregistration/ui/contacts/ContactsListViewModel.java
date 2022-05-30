@@ -109,24 +109,21 @@ public class ContactsListViewModel extends AndroidViewModel {
 
     }
 
-    public void connectGet() {
+    public void connectGet(final String jwt) {
         String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
 
         Request request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.GET,
                 url,
-                null, //no body
+                null, //no body for this get request
                 this::handleResult,
-                this::handleError){
+                this::handleError) {
+
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
                 // add headers <key,value>
-                String credentials = "username" + ":" + "password";
-                String auth = "Basic "
-                        + Base64.encodeToString(credentials.getBytes(),
-                        Base64.NO_WRAP);
-                headers.put("Authorization", auth);
+                headers.put("Authorization", jwt);
                 return headers;
             }
         };
