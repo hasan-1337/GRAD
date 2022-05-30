@@ -168,9 +168,9 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                     final int t = Integer.parseInt(time.substring(11, 13));
                     final String x = "" + ((t % 12 == 0)? 12:t % 12);
                     if (t % 12 == t) {
-                        output.append(String.format("%-11s", x + " AM"));
+                        output.append(String.format("%-12s", x + " AM"));
                     } else {
-                        output.append(String.format("%-11s", x + " PM"));
+                        output.append(String.format("%-12s", x + " PM"));
                     }
 
                     output2.append(df.format(temp)).append(String.format("%-8s", " °F"));
