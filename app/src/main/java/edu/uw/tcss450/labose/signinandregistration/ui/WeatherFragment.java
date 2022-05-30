@@ -231,11 +231,14 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 googleMap.setMyLocationEnabled(true);
 
                 if (coordinates == null) {
-                    final LatLng c = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(c, 4.0f));
-                } else {
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 4.0f));
+                    coordinates = new LatLng(location.getLatitude(), location.getLongitude());
                 }
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 4.0f));
+                mMap.addMarker(new MarkerOptions().position(coordinates));
+                getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+                getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
 
             }
         });
