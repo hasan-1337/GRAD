@@ -121,6 +121,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 final int clouds = jsonobject.getInt("clouds");
                 final String state = jsonobject.getString("city_name");
                 final String countryCode = jsonobject.getString("country_code");
+                coordinates = new LatLng(jsonobject.getDouble("lat"), jsonobject.getDouble("lon"));
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(coordinates));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, mMap.getCameraPosition().zoom));
                 output.append(" Current Forecast in\n").append(state).append(" (").
                         append(countryCode).append(")").append("\n").append(df.format(temp)).
                         append(" °F").append("\n\n Humidity: ").append(humidity).append("%").
@@ -210,9 +214,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
 
     @Override
     public void onMapClick(final @NonNull LatLng latLng) {
-        mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(latLng));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, mMap.getCameraPosition().zoom));
         coordinates = latLng;
         getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
         getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
@@ -234,8 +235,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                     coordinates = new LatLng(location.getLatitude(), location.getLongitude());
                 }
 
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 4.0f));
-                mMap.addMarker(new MarkerOptions().position(coordinates));
                 getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
                 getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
                 getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
