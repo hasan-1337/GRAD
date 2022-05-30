@@ -126,14 +126,14 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 mMap.addMarker(new MarkerOptions().position(coordinates));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, mMap.getCameraPosition().zoom));
                 output.append(" Current Forecast in\n").append(state).append(" (").
-                        append(countryCode).append(")").append("\n").append(df.format(temp)).
-                        append(" °F").append("\n\n Humidity: ").append(humidity).append("%").
+                        append(countryCode).append(")").append("\n\n").append(df.format(temp)).
+                        append(" °F").append("\n Humidity: ").append(humidity).append("%").
                         append("\n Wind Speed: ").append(df.format(wind)).append(" mph").
                         append("\n Cloudiness: ").append(clouds).append("%\n\n");
                 current = output.toString();
                 mBinding.currentWeather.setText(current); // Fill up the textview with the weather data
 
-                if (temp > 35) {
+                /*if (temp > 35) {
                     if (clouds > 50) {
                         background = R.drawable.cloudy;
                     } else {
@@ -143,7 +143,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                     background = R.drawable.snow;
                 }
 
-                mBinding.background.setBackgroundResource((Integer) background);
+                mBinding.background.setBackgroundResource((Integer) background);*/
             } catch (final JSONException e) {
                 e.printStackTrace();
             }

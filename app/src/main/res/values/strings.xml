@@ -3,8 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_home">Home</string>
-
-
+    <string name="logo">GRAD</string>
     <string name="hint_first">First Name</string>
     <string name="hint_last">Last Name</string>
     <string name="hint_email">Email</string>
@@ -16,8 +15,10 @@
     <string name="action_themes_dark">Dark</string>
     <string name="weather_input">Enter City Name or Zip Code</string>
     <string name="weather_button">Get weather forecast</string>
-    <string name="weather_invalid">City field can not be empty!</string>
-
+    <string name="home_description">Profile picture</string>
+    <string name="chat_something">Type something…</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Sign Out</string>
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
     <string name="title_contacts">Contacts</string>

@@ -18,6 +18,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -133,6 +135,25 @@ public class MainActivity extends AppCompatActivity {
                 mModel.addMessage(intent.getIntExtra("chat", -1), cm);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+
+            return true;
+        } else if (id == R.id.action_logout) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

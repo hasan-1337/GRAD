@@ -80,7 +80,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                                 res.getColor(R.color.primaryLightColor, null),
                                 16));
                 binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+                        res.getColor(R.color.primaryLightColor, null));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
@@ -100,8 +100,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 card.requestLayout();
             } else {
                 //This message is from another user. Format it as such
-                binding.textMessage.setText(message.getSender() +
-                        ": " + message.getMessage());
+                binding.textMessage.setText(message.getSender() + ": " + message.getMessage());
                 ViewGroup.MarginLayoutParams layoutParams =
                         (ViewGroup.MarginLayoutParams) card.getLayoutParams();
 
@@ -113,16 +112,16 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
                 card.setCardBackgroundColor(
                         ColorUtils.setAlphaComponent(
-                                res.getColor(R.color.secondaryLightColor, null),
+                                res.getColor(R.color.secondaryColor, null),
                                 16));
 
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(
-                        res.getColor(R.color.secondaryLightColor, null),
+                        res.getColor(R.color.secondaryColor, null),
                         200));
 
                 binding.textMessage.setTextColor(
-                        res.getColor(R.color.secondaryTextColorFade, null));
+                        res.getColor(R.color.secondaryColor, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(
