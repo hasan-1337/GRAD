@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/logo"
         android:src="@drawable/ic_send_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -59,7 +59,7 @@
             android:layout_marginEnd="8dp"
             android:orientation="vertical"
             app:layoutManager="LinearLayoutManager"
-            tools:context="edu.uw.tcss450.labose.signinandregistration.ui.blog.BlogListFragment"
+            tools:context=".ui.chat.ChatRecyclerViewAdapter"
             tools:listitem="@layout/fragment_chat_message"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

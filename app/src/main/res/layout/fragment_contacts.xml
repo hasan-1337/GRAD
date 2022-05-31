@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_root"
+    android:background="@color/primaryColor"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/primaryColor">
+    android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
@@ -14,9 +14,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
-        tools:context="edu.uw.tcss450.uiandnavigationlab.ui.blog.BlogListFragment"
+        tools:context=".ui.contacts.ContactsRecyclerViewAdapter"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:listitem="@layout/item_contact" />
+
+    <ImageView
+        android:id="@+id/contacts_add"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/primaryColor"
+        android:src="@drawable/ic_baseline_add_circle_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        android:contentDescription="@string/logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
