@@ -17,18 +17,23 @@ import java.util.List;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatRecyclerViewAdapter;
 
 public class ContactsListFragment extends Fragment {
 
+    private UserViewModel mUserModel;
     private ContactsListViewModel mModel;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserModel = provider.get(UserViewModel.class);
         mModel = new ViewModelProvider(getActivity()).get(ContactsListViewModel.class);
-        mModel.connectGet();
+        mModel.connectGet(mUserModel.getmJwt());
     }
 
     @Override
@@ -57,6 +62,12 @@ public class ContactsListFragment extends Fragment {
                         new ContactsRecyclerViewAdapter(contactList)
                 );
             }
+        });
+
+        //@Override
+        binding.contactsAdd.setOnClickListener(v -> {
+            // Add a contact
+
         });
     }
 }

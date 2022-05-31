@@ -4,7 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     tools:context=".ui.signin.SignInFragment">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/home_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/logotext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="@string/logo"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
         android:id="@+id/edit_email"
@@ -18,7 +43,8 @@
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:text="uwnetid5@fake.email.com"
+        android:textColor="@color/primaryDarkColor"
+        android:textColorHint="@color/primaryLightColor"
         app:layout_constraintBottom_toTopOf="@+id/guideline_fifty"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -29,15 +55,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
-    <ImageView
-        android:id="@+id/image_login_graphic"
-        android:layout_width="108dp"
-        android:layout_height="117dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="101dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/edit_email"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/edit_password"
@@ -51,7 +68,8 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:text="test5"
+        android:textColorHint="@color/primaryLightColor"
+        android:textColor="@color/primaryDarkColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_fifty" />
@@ -74,7 +92,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/action_register_short"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/secondaryColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 

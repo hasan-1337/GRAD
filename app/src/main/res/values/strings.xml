@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">Signin and Registration</string>
+    <string name="app_name">GRAD</string>
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_home">Home</string>
-
-
+    <string name="logo">GRAD</string>
     <string name="hint_first">First Name</string>
     <string name="hint_last">Last Name</string>
     <string name="hint_email">Email</string>
@@ -14,9 +13,16 @@
     <string name="action_register_short">Register</string>
     <string name="action_themes_light">Light</string>
     <string name="action_themes_dark">Dark</string>
-
+    <string name="weather_input">Enter City Name or Zip Code</string>
+    <string name="weather_button">Get weather forecast</string>
+    <string name="home_description">Profile picture</string>
+    <string name="chat_something">Type something…</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Sign Out</string>
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
+    <string name="title_contacts">Contacts</string>
+    <string name="title_weather">Weather</string>
 
     <string name="base_url_service">https://team-2-tcss450-webservice.herokuapp.com/</string>
     <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>
@@ -24,7 +30,23 @@
     <string name="keys_json_contact_response">response</string>
     <string name="keys_json_contact_data">data</string>
     <string name="keys_json_contact_name">name</string>
+    <string name="keys_json_contact_email">email</string>
+    <string name="keys_json_contact_id">id</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 </resources>

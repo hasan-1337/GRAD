@@ -29,66 +29,47 @@ public class ChatSendViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
 
-    public ChatSendViewModel(@NonNull Application application) {
+    public ChatSendViewModel(final @NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
+    public void addResponseObserver(final @NonNull LifecycleOwner owner, final @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
     public void sendMessage(final int chatId, final String jwt, final String message) {
-        String url = getApplication().getResources().getString(R.string.base_url_service) +
-                "messages";
+        final String url = getApplication().getResources().getString(R.string.base_url_service) + "messages";
+        final JSONObject body = new JSONObject();
 
-        JSONObject body = new JSONObject();
         try {
             body.put("message", message);
             body.put("chatId", chatId);
-        } catch (JSONException e) {
+        } catch (final JSONException e) {
             e.printStackTrace();
         }
 
-        Request request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                body, //push token found in the JSONObject body
-                mResponse::setValue, // we get a response but do nothing with it
-                this::handleError) {
-
+        final Request<JSONObject> request = new JsonObjectRequest(Request.Method.POST, url, body, mResponse::setValue, this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                // add headers <key,value>
+                final Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", jwt);
                 return headers;
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(10_000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Instantiate the RequestQueue and add the request to the queue
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
     }
-
-
 
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
-        }
-        else {
+        } else {
             String data = new String(error.networkResponse.data, Charset.defaultCharset());
-            Log.e("CLIENT ERROR",
-                    error.networkResponse.statusCode +
-                            " " +
-                            data);
+            Log.e("CLIENT ERROR", error.networkResponse.statusCode + " " + data);
         }
     }
 }

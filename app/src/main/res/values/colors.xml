@@ -2,16 +2,10 @@
 <resources>
     <!--    Added color variables to match required MaterialDesign themes-->
 
-    <color name="primaryColor">#EFF79504</color>
-    <color name="primaryLightColor">#7953d2</color>
-    <color name="primaryDarkColor">#B6D30909</color>
-    <color name="secondaryColor">#b7a57a</color>
-    <color name="secondaryLightColor">#ead6a9</color>
-
-    <color name="secondaryTextColorFade">#222222</color>
-
-    <color name="colorPrimary">@color/primaryColor</color>
-    <color name="colorPrimaryDark">@color/primaryDarkColor</color>
-    <color name="colorAccent">@color/secondaryColor</color>
+    <color name="primaryColor">#2D2E33</color>
+    <color name="primaryLightColor">#B1B2B5</color>
+    <color name="primaryDarkColor">#eeeeee</color>
+    <color name="secondaryColor">#F62736</color>
+    <color name="secondaryDarkColor">#8F1A34</color>
 
 </resources>
