@@ -59,37 +59,30 @@ public class ContactsListViewModel extends AndroidViewModel {
         IntFunction<String> getString =
                 getApplication().getResources()::getString;
         try {
-            JSONObject root = result;
-            if (root.has(getString.apply(R.string.keys_json_contact_response))) {
-                JSONObject response =
-                        root.getJSONObject(getString.apply(
-                                R.string.keys_json_contact_response));
-                if (response.has(getString.apply(R.string.keys_json_contact_data))) {
-                    JSONArray data = response.getJSONArray(
-                            getString.apply(R.string.keys_json_contact_data));
-                    for (int i = 0; i < data.length(); i++) {
-                        JSONObject jsonContact = data.getJSONObject(i);
-                        ContactModel contact = new ContactModel(
-                                jsonContact.getString(
-                                        getString.apply(
-                                                R.string.keys_json_contact_email)));
-                        contact.setId(
-                                jsonContact.getString(
-                                        getString.apply(
-                                                R.string.keys_json_contact_id)));
-                        contact.setName(
-                                jsonContact.getString(
-                                        getString.apply(
-                                                R.string.keys_json_contact_name)));
-                        if (!mContactList.getValue().contains(contact)) {
-                            mContactList.getValue().add(contact);
-                        }
+            JSONObject response = result;
+            if (response.has(getString.apply(R.string.keys_json_contact_response))) {
+                JSONArray data = response.getJSONArray(
+                        getString.apply(R.string.keys_json_contact_response));
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject jsonContact = data.getJSONObject(i);
+                    ContactModel contact = new ContactModel(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_email)));
+                    contact.setId(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_id)));
+                    contact.setName(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_name)));
+                    if (!mContactList.getValue().contains(contact)) {
+                        mContactList.getValue().add(contact);
                     }
-                } else {
-                    Log.e("ERROR!", "No data array");
                 }
             } else {
-                Log.e("ERROR!", "No response");
+                Log.e("ERROR!", "No data array");
             }
         } catch (JSONException e) {
             e.printStackTrace();
