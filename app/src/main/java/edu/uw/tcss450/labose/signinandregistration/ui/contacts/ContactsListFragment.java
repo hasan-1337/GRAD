@@ -63,5 +63,11 @@ public class ContactsListFragment extends Fragment {
                 );
             }
         });
+
+        //@Override
+        binding.contactsAdd.setOnClickListener(v -> {
+            // Add a contact
+
+        });
     }
 }

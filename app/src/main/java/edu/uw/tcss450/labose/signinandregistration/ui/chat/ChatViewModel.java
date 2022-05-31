@@ -35,9 +35,9 @@ public class ChatViewModel  extends AndroidViewModel {
      * The Key represents the Chat ID
      * The value represents the List of (known) messages for that that room.
      */
-    private Map<Integer, MutableLiveData<List<ChatMessage>>> mMessages;
+    private final Map<Integer, MutableLiveData<List<ChatMessage>>> mMessages;
 
-    public ChatViewModel(@NonNull Application application) {
+    public ChatViewModel(final @NonNull Application application) {
         super(application);
         mMessages = new HashMap<>();
     }
@@ -48,9 +48,7 @@ public class ChatViewModel  extends AndroidViewModel {
      * @param owner the fragments lifecycle owner
      * @param observer the observer
      */
-    public void addMessageObserver(int chatId,
-                                   @NonNull LifecycleOwner owner,
-                                   @NonNull Observer<? super List<ChatMessage>> observer) {
+    public void addMessageObserver(final int chatId, final @NonNull LifecycleOwner owner, final @NonNull Observer<? super List<ChatMessage>> observer) {
         getOrCreateMapEntry(chatId).observe(owner, observer);
     }
 
@@ -88,33 +86,20 @@ public class ChatViewModel  extends AndroidViewModel {
      * @param jwt the users signed JWT
      */
     public void getFirstMessages(final int chatId, final String jwt) {
-        String url = getApplication().getResources().getString(R.string.base_url_service) +
-                "messages/" + chatId;
+        String url = getApplication().getResources().getString(R.string.base_url_service) + "messages/" + chatId;
 
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, //no body for this get request
-                this::handelSuccess,
-                this::handleError) {
-
+        final Request<JSONObject> request = new JsonObjectRequest(Request.Method.GET, url, null, this::handelSuccess, this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                // add headers <key,value>
+                final Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", jwt);
                 return headers;
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(10_000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Instantiate the RequestQueue and add the request to the queue
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
         //code here will run
     }
 
@@ -131,36 +116,20 @@ public class ChatViewModel  extends AndroidViewModel {
      * @param jwt the users signed JWT
      */
     public void getNextMessages(final int chatId, final String jwt) {
-        String url = getApplication().getResources().getString(R.string.base_url_service) +
-                "messages/" +
-                chatId +
-                "/" +
-                mMessages.get(chatId).getValue().get(0).getMessageId();
+        final String url = getApplication().getResources().getString(R.string.base_url_service) + "messages/" + chatId + "/" + mMessages.get(chatId).getValue().get(0).getMessageId();
 
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, //no body for this get request
-                this::handelSuccess,
-                this::handleError) {
-
+        final Request<JSONObject> request = new JsonObjectRequest(Request.Method.GET, url, null, this::handelSuccess, this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                // add headers <key,value>
+                final Map<String, String> headers = new HashMap<>();
                 headers.put("Authorization", jwt);
                 return headers;
             }
         };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(10_000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Instantiate the RequestQueue and add the request to the queue
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
         //code here will run
     }
 
@@ -183,7 +152,8 @@ public class ChatViewModel  extends AndroidViewModel {
         }
         try {
             list = getMessageListByChatId(response.getInt("chatId"));
-            JSONArray messages = response.getJSONArray("rows");
+            final JSONArray messages = response.getJSONArray("rows");
+
             for(int i = 0; i < messages.length(); i++) {
                 JSONObject message = messages.getJSONObject(i);
                 ChatMessage cMessage = new ChatMessage(
@@ -198,14 +168,13 @@ public class ChatViewModel  extends AndroidViewModel {
                 } else {
                     // this shouldn't happen but could with the asynchronous
                     // nature of the application
-                    Log.wtf("Chat message already received",
-                            "Or duplicate id:" + cMessage.getMessageId());
+                    Log.wtf("Chat message already received", "Or duplicate id:" + cMessage.getMessageId());
                 }
 
             }
             //inform observers of the change (setValue)
             getOrCreateMapEntry(response.getInt("chatId")).setValue(list);
-        }catch (JSONException e) {
+        } catch (final JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
@@ -217,10 +186,7 @@ public class ChatViewModel  extends AndroidViewModel {
         }
         else {
             String data = new String(error.networkResponse.data, Charset.defaultCharset());
-            Log.e("CLIENT ERROR",
-                    error.networkResponse.statusCode +
-                            " " +
-                            data);
+            Log.e("CLIENT ERROR", error.networkResponse.statusCode + " " + data);
         }
     }
 }

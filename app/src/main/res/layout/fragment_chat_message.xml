@@ -24,7 +24,6 @@
             android:id="@+id/layout_inner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/secondaryColor"
             app:layout_constraintBottom_toTopOf="@+id/text_title"
             app:layout_constraintTop_toTopOf="@+id/text_title">
 
@@ -35,7 +34,6 @@
                 android:padding="10dp"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textStyle="bold"
-                android:textColor="@color/primaryColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
