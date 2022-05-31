@@ -52,7 +52,7 @@ public class ChatSendViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
 
-        Request request = new JsonObjectRequest(
+        Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 body, //push token found in the JSONObject body
@@ -76,8 +76,6 @@ public class ChatSendViewModel extends AndroidViewModel {
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
     }
-
-
 
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {

@@ -21,17 +21,17 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/contact_img"
+                android:id="@+id/chat_img"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_contact_grey_80"
+                android:src="@drawable/ic_contacts_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/contact_name"
+                android:id="@+id/chat_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
@@ -39,7 +39,7 @@
                 android:textSize="24dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/contact_img"
+                app:layout_constraintStart_toEndOf="@+id/chat_img"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

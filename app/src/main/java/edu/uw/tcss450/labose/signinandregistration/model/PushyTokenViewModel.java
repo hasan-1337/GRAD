@@ -119,7 +119,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
 
-        Request request = new JsonObjectRequest(
+        final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.PUT,
                 url,
                 body, //push token found in the JSONObject body

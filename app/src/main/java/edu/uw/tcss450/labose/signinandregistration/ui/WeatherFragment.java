@@ -44,7 +44,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
     private static String hourly;
     private static String current;
     private static String daily;
-    private static Object background;
     private static LatLng coordinates;
     private static final DecimalFormat df = new DecimalFormat("#.#");
 
@@ -63,10 +62,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         mBinding.currentWeather.setText(current);
         mBinding.tvResult.setText(daily);
         mBinding.btnGet.setOnClickListener(this::getWeatherDetails);
-
-        if (background != null) {
-            mBinding.background.setBackgroundResource((Integer) background);
-        }
 
         final SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
@@ -133,17 +128,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 current = output.toString();
                 mBinding.currentWeather.setText(current); // Fill up the textview with the weather data
 
-                /*if (temp > 35) {
-                    if (clouds > 50) {
-                        background = R.drawable.cloudy;
-                    } else {
-                        background = R.drawable.weather;
-                    }
-                } else {
-                    background = R.drawable.snow;
-                }
-
-                mBinding.background.setBackgroundResource((Integer) background);*/
             } catch (final JSONException e) {
                 e.printStackTrace();
             }

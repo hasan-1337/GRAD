@@ -50,8 +50,7 @@
             android:background="@color/secondaryColor"
             android:text="@string/weather_button"
             android:textColor="@color/primaryDarkColor"
-            app:backgroundTint="@null"
-            tools:ignore="UsingOnClickInXml" />
+            app:backgroundTint="@null" />
 
         <TextView
             android:id="@+id/currentWeather"

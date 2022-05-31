@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.services.PushReceiver;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatViewModel;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
-        new ViewModelProvider(this, new userViewModel.userViewModelFactory(args.getEmail(), args.getJwt())).get(userViewModel.class);
+        new ViewModelProvider(this, new UserViewModel.userViewModelFactory(args.getEmail(), args.getJwt())).get(UserViewModel.class);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -143,17 +144,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-
-            return true;
-        } else if (id == R.id.action_logout) {
-
-            return true;
+        switch(item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            case R.id.action_logout:
+                startActivity(new Intent(this, AuthActivity.class));
+                finish();
+                return true;
+            default: return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -180,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
             unregisterReceiver(mPushMessageReceiver);
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentThemeBinding;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
 
 /**
@@ -24,9 +24,8 @@ import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
  */
 public class ThemeFragment extends Fragment {
 
-
     private FragmentThemeBinding binding;
-    private userViewModel viewModel;
+    private UserViewModel viewModel;
     Button button_red_theme, button_dark_theme;
     private RadioGroup radioGroup;
     private TextView themeTV;
@@ -45,7 +44,7 @@ public class ThemeFragment extends Fragment {
 
         binding = FragmentThemeBinding.inflate(inflater);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
-        viewModel = provider.get(userViewModel.class);
+        viewModel = provider.get(UserViewModel.class);
 
         radioGroup = binding.getRoot().findViewById(R.id.idRGgroup);
         themeTV = binding.getRoot().findViewById(R.id.tv_Theme);
