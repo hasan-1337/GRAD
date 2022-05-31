@@ -48,7 +48,7 @@ public class ContactsListFragment extends Fragment {
 
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
 
-        final RecyclerView rv = binding.recyclerContacts;
+        final RecyclerView rv = binding.recyclerChatlist;
 
         ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
 
@@ -58,7 +58,7 @@ public class ContactsListFragment extends Fragment {
 
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             if(!contactList.isEmpty()) {
-                binding.recyclerContacts.setAdapter(
+                binding.recyclerChatlist.setAdapter(
                         new ContactsRecyclerViewAdapter(contactList)
                 );
             }
