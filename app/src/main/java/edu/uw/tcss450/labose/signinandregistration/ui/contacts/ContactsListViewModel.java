@@ -1,6 +1,7 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.contacts;
 
 import android.app.Application;
+import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.IntFunction;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
@@ -53,72 +56,80 @@ public class ContactsListViewModel extends AndroidViewModel {
     }
 
     private void handleResult(final JSONObject result) {
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-//        try {
-//            JSONObject root = result;
-//            if (root.has(getString.apply(R.string.keys_json_contact_response))) {
-//                JSONObject response =
-//                        root.getJSONObject(getString.apply(
-//                                R.string.keys_json_contact_response));
-//                if (response.has(getString.apply(R.string.keys_json_contact_data))) {
-//                    JSONArray data = response.getJSONArray(
-//                            getString.apply(R.string.keys_json_contact_data));
-//                    for (int i = 0; i < data.length(); i++) {
-//                        JSONObject jsonContact = data.getJSONObject(i);
-//                        ContactModel contact = new ContactModel();
-//                        contact.setEmail(
-//                                jsonContact.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_contact_name)));
-//                        if (!mContactList.getValue().contains(contact)) {
-//                            mContactList.getValue().add(contact);
-//                        }
-//                    }
-//                } else {
-//                    Log.e("ERROR!", "No data array");
-//                }
-//            } else {
-//                Log.e("ERROR!", "No response");
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.e("ERROR!", e.getMessage());
-//        }
-        for (int i = 0; i < 5; i++) {
-            ContactModel contact = new ContactModel("contact " + i);
-            mContactList.getValue().add(contact);
-            Log.e("for loop", mContactList.getValue().get(i).getEmail());
+        IntFunction<String> getString =
+                getApplication().getResources()::getString;
+        try {
+            JSONObject response = result;
+            if (response.has(getString.apply(R.string.keys_json_contact_response))) {
+                JSONArray data = response.getJSONArray(
+                        getString.apply(R.string.keys_json_contact_response));
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject jsonContact = data.getJSONObject(i);
+                    ContactModel contact = new ContactModel(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_email)));
+                    contact.setId(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_id)));
+                    contact.setName(
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_name)));
+                    if (!mContactList.getValue().contains(contact)) {
+                        mContactList.getValue().add(contact);
+                    }
+                }
+            } else {
+                Log.e("ERROR!", "No data array");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR!", e.getMessage());
         }
-
-        Log.e("test", "made it here 1");
-
-        Log.e("after for", mContactList.getValue().get(0).getEmail());
+//        for (int i = 0; i < 5; i++) {
+//            ContactModel contact = new ContactModel("contact " + i);
+//            mContactList.getValue().add(contact);
+//            Log.e("for loop", mContactList.getValue().get(i).getEmail());
+//        }
+//
+//        Log.e("test", "made it here 1");
+//
+//        Log.e("after for", mContactList.getValue().get(0).getEmail());
 
         mContactList.setValue(mContactList.getValue());
 
     }
 
-    public void connectGet() {
-        String url = "https://team-2-tcss450-webservice.herokuapp.com/auth";
+    public void connectGet(final String jwt) {
+        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
 
+        Request request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null, //no body for this get request
+                this::handleResult,
+                this::handleError) {
 
-//        Request request = new JsonObjectRequest(
-//                Request.Method.POST,
-//                url,
-//                null, //no body
-//                this::handleResult,
-//                this::handleError);
-//
-//        request.setRetryPolicy(new DefaultRetryPolicy(
-//                10_000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//
-//        //Instantiate the RequestQueue and add the request to the queue
-//        Volley.newRequestQueue(getApplication().getApplicationContext())
-//                .add(request);
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
 
-        handleResult(new JSONObject());
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+
+//        handleResult(new JSONObject());
     }
 }

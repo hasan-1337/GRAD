@@ -28,8 +28,7 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
-import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentHomeBinding;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,8 +54,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        userViewModel model = new ViewModelProvider(getActivity())
-                .get(userViewModel.class);
+        UserViewModel model = new ViewModelProvider(getActivity())
+                .get(UserViewModel.class);
 
         mBinding = FragmentHomeBinding.bind(getView());
 

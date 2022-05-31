@@ -36,7 +36,7 @@ import java.text.DecimalFormat;
 
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
-import edu.uw.tcss450.labose.signinandregistration.model.userViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.services.PushReceiver;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatViewModel;
@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity {
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
         new ViewModelProvider(this,
-                new userViewModel.userViewModelFactory(args.getEmail(), args.getJwt())
-        ).get(userViewModel.class);
+                new UserViewModel.userViewModelFactory(args.getEmail(), args.getJwt())
+        ).get(UserViewModel.class);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
