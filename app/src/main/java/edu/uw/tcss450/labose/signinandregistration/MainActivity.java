@@ -48,10 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
-    private EditText etCity; // Area where to type the city
-    private TextView tvResult; // Result of the weather (7 days)
-    private TextView currentWeather; // Result of the weather (current)
-    private TextView hourlyWeather; // Result of the weather (hourly)
     private final DecimalFormat df = new DecimalFormat("#.#");
 
     @Override
@@ -95,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 badge.setVisible(false);
             }
         });
-        etCity = findViewById(R.id.etCity);
-        tvResult = findViewById(R.id.tvResult);
-        currentWeather = findViewById(R.id.currentWeather);
-        hourlyWeather = findViewById(R.id.hourlyWeather);
     }
 
     private class MainPushMessageReceiver extends BroadcastReceiver {
@@ -122,111 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mModel.addMessage(intent.getIntExtra("chat", -1), cm);
             }
-        }
-    }
-
-    // Retrieve the weather data
-    @SuppressLint("SetTextI18n")
-    public void getWeatherDetails(View view) {
-        String tempUrl;
-        String city = etCity.getText().toString().trim();
-        if(city.equals("")){ // if nothing is typed
-            tvResult.setText("City field can not be empty!");
-        }else{
-            tempUrl = "https://api.weatherbit.io/v2.0/forecast/daily?city=" + city + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4";
-            // request the JSON information
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-                StringBuilder output = new StringBuilder();
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("data");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonobject = jsonArray.getJSONObject(i);
-                        double temp = jsonobject.getDouble("temp");
-                        int humidity = jsonobject.getInt("rh");
-                        double wind = jsonobject.getDouble("wind_spd");
-                        String clouds = jsonobject.getString("clouds");
-                        output.append(" Day ").append(i + 1).append("\n").append(df.format(temp)).append(" °F").append("\n Humidity: ").append(humidity).append("%").append("\n Wind Speed: ").append(df.format(wind)).append(" mph").append("\n Cloudiness: ").append(clouds).append("%\n\n");
-                    }
-                    tvResult.setText(output.toString()); // Fill up the textview with the weather data
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }, error -> Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
-
-            tempUrl = "https://api.weatherbit.io/v2.0/current?city=" + city + "&units=I&key=51500e0f085741f591dc0356d9a03ff4";
-            // Resend the request to retrieve the current forecast.
-            stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-                String output = "";
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("data");
-                    JSONObject jsonobject = jsonArray.getJSONObject(0);
-                    double temp = jsonobject.getDouble("temp");
-                    int humidity = jsonobject.getInt("rh");
-                    double wind = jsonobject.getDouble("wind_spd");
-                    int clouds = jsonobject.getInt("clouds");
-                    String state = jsonobject.getString("city_name");
-                    String countryCode = jsonobject.getString("country_code");
-                    output += " Current Forecast in\n" + state + " (" + countryCode + ")"
-                            + "\n" + df.format(temp) + " °F"
-                            + "\n\n Humidity: " + humidity + "%"
-                            + "\n Wind Speed: " + df.format(wind) + " mph"
-                            + "\n Cloudiness: " + clouds + "%\n\n";
-                    currentWeather.setText(output); // Fill up the textview with the weather data
-
-                    LinearLayout layout = findViewById(R.id.background);
-                    if (temp > 35) {
-                        if (clouds > 50) {
-                            layout.setBackgroundResource(R.drawable.cloudy);
-                        } else {
-                            layout.setBackgroundResource(R.drawable.weather);
-                        }
-                    } else {
-                        layout.setBackgroundResource(R.drawable.snow);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }, error -> Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
-
-            tempUrl = "https://api.weatherbit.io/v2.0/forecast/hourly?city=" + city + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4";
-            // Resend the request to retrieve the current forecast.
-            stringRequest = new StringRequest(Request.Method.POST, tempUrl, response -> {
-                StringBuilder output = new StringBuilder();
-                StringBuilder output2 = new StringBuilder();
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    JSONArray jsonArray = jsonResponse.getJSONArray("data");
-                    output.append(String.format("%-4s", ""));
-
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonobject = jsonArray.getJSONObject(i);
-                        double temp = jsonobject.getDouble("temp");
-                        String time = jsonobject.getString("timestamp_local");
-                        int t = Integer.parseInt(time.substring(11, 13));
-                        String x = "" + ((t % 12 == 0)? 12:t % 12);
-                        if (t % 12 == t) {
-                            output.append(String.format("%-11s", x + " AM"));
-                        } else {
-                            output.append(String.format("%-11s", x + " PM"));
-                        }
-
-                        output2.append(df.format(temp)).append(String.format("%-8s", " °F"));
-                    }
-                    hourlyWeather.setText(output + "\n" + output2); // Fill up the textview with the weather data
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }, error -> Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show());
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-            requestQueue.add(stringRequest);
         }
     }
 
