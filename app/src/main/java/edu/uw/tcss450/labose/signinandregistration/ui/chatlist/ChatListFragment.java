@@ -1,6 +1,7 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.chatlist;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBinding;
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatlistBinding;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
@@ -36,14 +39,14 @@ public class ChatListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contacts, container, false);
+        return inflater.inflate(R.layout.fragment_chatlist, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
+        FragmentChatlistBinding binding = FragmentChatlistBinding.bind(getView());
 
         final RecyclerView rv = binding.recyclerChatlist;
 
@@ -59,6 +62,12 @@ public class ChatListFragment extends Fragment {
                         new ChatListRecyclerViewAdapter(chatList)
                 );
             }
+        });
+
+        //@Override
+        binding.chatAdd.setOnClickListener(v -> {
+            // Add a contact
+            Log.e("Button", "Chat Button");
         });
     }
 }
