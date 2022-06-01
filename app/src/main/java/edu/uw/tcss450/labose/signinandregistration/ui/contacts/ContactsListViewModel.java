@@ -31,9 +31,6 @@ import edu.uw.tcss450.labose.signinandregistration.R;
 
 public class ContactsListViewModel extends AndroidViewModel {
 
-//    FragmentContactsBinding mBinding;
-//    ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
-
     private MutableLiveData<List<ContactModel>> mContactList;
     private ArrayList<Integer> mContactIDs;
 
@@ -123,7 +120,5 @@ public class ContactsListViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
-
-//        handleResult(new JSONObject());
     }
 }
