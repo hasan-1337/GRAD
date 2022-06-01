@@ -16,6 +16,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 startActivity(new Intent(this, AuthActivity.class));
                 finish();
+                signOut();
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
@@ -239,5 +241,14 @@ public class MainActivity extends AppCompatActivity {
         // application will never receive updates faster than this value.
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
         mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+    private void signOut() {
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
+        //End the app completely
+        finishAndRemoveTask();
     }
 }
