@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
@@ -34,10 +35,12 @@ public class ContactsListViewModel extends AndroidViewModel {
 //    ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
 
     private MutableLiveData<List<ContactModel>> mContactList;
+    private ArrayList<Integer> mContactIDs;
 
     public ContactsListViewModel(@NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
+        mContactIDs = new ArrayList<Integer>();
     }
 
     public void addContactListObserver(@NonNull LifecycleOwner owner,
@@ -57,6 +60,7 @@ public class ContactsListViewModel extends AndroidViewModel {
     private void handleResult(final JSONObject result) {
         IntFunction<String> getString =
                 getApplication().getResources()::getString;
+
         try {
             if (result.has(getString.apply(R.string.keys_json_contact_response))) {
                 JSONArray data = result.getJSONArray(
@@ -68,15 +72,16 @@ public class ContactsListViewModel extends AndroidViewModel {
                                     getString.apply(
                                             R.string.keys_json_contact_email)));
                     contact.setId(
-                            jsonContact.getString(
+                            jsonContact.getInt(
                                     getString.apply(
                                             R.string.keys_json_contact_id)));
                     contact.setName(
                             jsonContact.getString(
                                     getString.apply(
                                             R.string.keys_json_contact_name)));
-                    if (!mContactList.getValue().contains(contact)) {
+                    if (!mContactIDs.contains(contact.getId())) {
                         mContactList.getValue().add(contact);
+                        mContactIDs.add(contact.getId());
                     }
                 }
             } else {
@@ -86,15 +91,6 @@ public class ContactsListViewModel extends AndroidViewModel {
             e.printStackTrace();
             Log.e("ERROR!", e.getMessage());
         }
-//        for (int i = 0; i < 5; i++) {
-//            ContactModel contact = new ContactModel("contact " + i);
-//            mContactList.getValue().add(contact);
-//            Log.e("for loop", mContactList.getValue().get(i).getEmail());
-//        }
-//
-//        Log.e("test", "made it here 1");
-//
-//        Log.e("after for", mContactList.getValue().get(0).getEmail());
 
         mContactList.setValue(mContactList.getValue());
 
