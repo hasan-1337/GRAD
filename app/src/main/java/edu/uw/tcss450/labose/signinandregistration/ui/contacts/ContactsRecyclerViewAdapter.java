@@ -53,7 +53,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
         public void setContact(ContactModel contact) {
             mContact = contact;
-            binding.contactName.setText(contact.getEmail());
+            binding.contactName.setText(contact.getName());
         }
     }
 }
