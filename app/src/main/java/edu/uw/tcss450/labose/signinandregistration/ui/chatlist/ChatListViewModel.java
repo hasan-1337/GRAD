@@ -9,13 +9,23 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.IntFunction;
 
+import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatlistBinding;
 
 
@@ -46,66 +56,73 @@ public class ChatListViewModel extends AndroidViewModel {
     }
 
     private void handleResult(final JSONObject result) {
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-//        try {
-//            JSONObject root = result;
-//            if (root.has(getString.apply(R.string.keys_json_contact_response))) {
-//                JSONObject response =
-//                        root.getJSONObject(getString.apply(
-//                                R.string.keys_json_contact_response));
-//                if (response.has(getString.apply(R.string.keys_json_contact_data))) {
-//                    JSONArray data = response.getJSONArray(
-//                            getString.apply(R.string.keys_json_contact_data));
-//                    for (int i = 0; i < data.length(); i++) {
-//                        JSONObject jsonContact = data.getJSONObject(i);
-//                        ContactModel contact = new ContactModel();
-//                        contact.setEmail(
-//                                jsonContact.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_contact_name)));
-//                        if (!mContactList.getValue().contains(contact)) {
-//                            mContactList.getValue().add(contact);
-//                        }
-//                    }
-//                } else {
-//                    Log.e("ERROR!", "No data array");
-//                }
-//            } else {
-//                Log.e("ERROR!", "No response");
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.e("ERROR!", e.getMessage());
-//        }
+        IntFunction<String> getString =
+                getApplication().getResources()::getString;
 
-        ChatModel chat = new ChatModel(1);
-        mChatList.getValue().add(chat);
+        try {
+            JSONObject root = result;
+            if (root.has(getString.apply(R.string.keys_json_chat_rowcount))
+                    && root.has(getString.apply(R.string.keys_json_chat_rows))) { //TODO: make into string resources
+//                int rowCount = Integer.parseInt(root.getJSONObject(getString.apply("rowCount")));
+                JSONArray rows =
+                        root.getJSONArray(getString.apply(R.string.keys_json_chat_rows));
+                for (int i = 0; i < rows.length(); i++) {
+                    //successful response acquired.
+                    JSONObject jsonChat = rows.getJSONObject(i);
+                    //get relevant fields
+                    int chatNumber = jsonChat.getInt(
+                            getString.apply(R.string.keys_json_chat_id));
+                    String chatName = jsonChat.getString(
+                            getString.apply(R.string.keys_json_chat_name));
+                    //create chat and add to list
+                    ChatModel chat = new ChatModel(chatNumber, chatName);
+                    if (!mChatList.getValue().contains(chat)) {
+                        mChatList.getValue().add(chat);
+                    }
+                }
+            } else {
+                Log.e("ERROR!", "No response");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR!", e.getMessage());
+        }
+
+//        ChatModel chat = new ChatModel(1);
+//        mChatList.getValue().add(chat);
 
         mChatList.setValue(mChatList.getValue());
 
     }
 
-    public void connectGet() {
-        String url = "https://team-2-tcss450-webservice.herokuapp.com/auth";
+    public void connectGet(final String jwt) {
+        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats/chatrooms";
 
+        final Request<JSONObject> request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null, //no body for this get request
+                this::handleResult,
+                this::handleError) {
 
-//        Request request = new JsonObjectRequest(
-//                Request.Method.POST,
-//                url,
-//                null, //no body
-//                this::handleResult,
-//                this::handleError);
-//
-//        request.setRetryPolicy(new DefaultRetryPolicy(
-//                10_000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//
-//        //Instantiate the RequestQueue and add the request to the queue
-//        Volley.newRequestQueue(getApplication().getApplicationContext())
-//                .add(request);
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
 
-        handleResult(new JSONObject());
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+
+//        handleResult(new JSONObject());
     }
 }

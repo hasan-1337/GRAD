@@ -32,7 +32,7 @@ public class ContactsListFragment extends Fragment {
 
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserViewModel.class);
-        mModel = new ViewModelProvider(getActivity()).get(ContactsListViewModel.class);
+        mModel = provider.get(ContactsListViewModel.class);
         mModel.connectGet(mUserModel.getmJwt());
     }
 

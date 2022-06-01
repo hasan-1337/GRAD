@@ -16,17 +16,21 @@ import java.util.ArrayList;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
+import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 
 public class ChatListFragment extends Fragment {
 
+    private UserViewModel mUserModel;
     private ChatListViewModel mModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
-        mModel.connectGet();
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserModel = provider.get(UserViewModel.class);
+        mModel = provider.get(ChatListViewModel.class);
+        mModel.connectGet(mUserModel.getmJwt());
     }
 
     @Override
