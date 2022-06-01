@@ -26,19 +26,16 @@ import java.util.Map;
 import java.util.function.IntFunction;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
-import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatlistBinding;
 
 
 public class ChatListViewModel extends AndroidViewModel {
-
-    FragmentChatlistBinding mBinding;
-    ArrayList<ChatModel> arrayList = new ArrayList<ChatModel>();
-
     private MutableLiveData<List<ChatModel>> mChatList;
+    private ArrayList<Integer> mChatIDs;
 
     public ChatListViewModel(@NonNull Application application) {
         super(application);
         mChatList = new MutableLiveData<>(new ArrayList<>());
+        mChatIDs = new ArrayList<Integer>();
     }
 
     public void addChatListObserver(@NonNull LifecycleOwner owner,
@@ -62,8 +59,7 @@ public class ChatListViewModel extends AndroidViewModel {
         try {
             JSONObject root = result;
             if (root.has(getString.apply(R.string.keys_json_chat_rowcount))
-                    && root.has(getString.apply(R.string.keys_json_chat_rows))) { //TODO: make into string resources
-//                int rowCount = Integer.parseInt(root.getJSONObject(getString.apply("rowCount")));
+                    && root.has(getString.apply(R.string.keys_json_chat_rows))) {
                 JSONArray rows =
                         root.getJSONArray(getString.apply(R.string.keys_json_chat_rows));
                 for (int i = 0; i < rows.length(); i++) {
@@ -76,8 +72,9 @@ public class ChatListViewModel extends AndroidViewModel {
                             getString.apply(R.string.keys_json_chat_name));
                     //create chat and add to list
                     ChatModel chat = new ChatModel(chatNumber, chatName);
-                    if (!mChatList.getValue().contains(chat)) {
+                    if (!mChatIDs.contains(chat.getChatID())) {
                         mChatList.getValue().add(chat);
+                        mChatIDs.add(chat.getChatID());
                     }
                 }
             } else {
@@ -87,9 +84,6 @@ public class ChatListViewModel extends AndroidViewModel {
             e.printStackTrace();
             Log.e("ERROR!", e.getMessage());
         }
-
-//        ChatModel chat = new ChatModel(1);
-//        mChatList.getValue().add(chat);
 
         mChatList.setValue(mChatList.getValue());
 
@@ -122,7 +116,5 @@ public class ChatListViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
-
-//        handleResult(new JSONObject());
     }
 }

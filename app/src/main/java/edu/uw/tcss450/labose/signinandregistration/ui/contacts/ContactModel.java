@@ -3,7 +3,7 @@ package edu.uw.tcss450.labose.signinandregistration.ui.contacts;
 import java.io.Serializable;
 
 public class ContactModel implements Serializable {
-    String id;
+    int id;
     String name;
     String email;
 
@@ -13,11 +13,11 @@ public class ContactModel implements Serializable {
         return email;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
