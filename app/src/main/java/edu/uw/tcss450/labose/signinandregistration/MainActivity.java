@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -36,6 +38,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
@@ -271,7 +274,7 @@ public class MainActivity extends AppCompatActivity {
         mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    private void signOut() {
+    public void signOut() {
         SharedPreferences prefs =
                 getSharedPreferences(
                         getString(R.string.keys_shared_prefs),

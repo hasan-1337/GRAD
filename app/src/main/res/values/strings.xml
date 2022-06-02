@@ -19,6 +19,8 @@
     <string name="chat_something">Type something…</string>
     <string name="action_settings">Settings</string>
     <string name="action_logout">Sign Out</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="weather_preference">°C / °F</string>
     <string name="hint_themes">Hint</string>
     <string name="title_chat">Chat</string>
     <string name="title_contacts">Contacts</string>
