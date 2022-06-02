@@ -27,7 +27,7 @@
     <string name="title_weather">Weather</string>
 
     <string name="base_url_service">https://team-2-tcss450-server-m-c.herokuapp.com/</string>
-    <string name="base_url_auth">https://dashboard.heroku.com/apps/team-2-tcss450-webservice/</string>
+    <string name="base_url_auth">https://team-2-tcss450-webservice.herokuapp.com/</string>
 
     <string name="keys_json_contact_response">response</string>
     <string name="keys_json_contact_data">data</string>

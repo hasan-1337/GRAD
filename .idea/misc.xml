@@ -31,10 +31,19 @@
         <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450/app/src/main/res/layout/activity_main.xml" value="0.8663366336633663" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/activity_auth.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chat.xml" value="0.2125" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chat_message.xml" value="0.2125" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chatlist.xml" value="0.1" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_contacts.xml" value="0.1091703056768559" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_create_chat_dialog.xml" value="0.2125" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_registration.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_sign.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_theme.xml" value="0.2125" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_weather.xml" value="0.2125" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/item_chat.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/item_contact.xml" value="0.2125" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/menu/toolbar.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19114583333333332" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/layout/fragment_sign.xml" value="0.19114583333333332" />
