@@ -82,9 +82,12 @@ public class CreateChatDialogViewModel extends AndroidViewModel {
 
         JSONObject body = new JSONObject();
 
+        String HARD_CODED_CHAT_NAME = "New Chat (7)";
+        int HARD_CODED_CHAT_ID = 7;
+
         try {
-            body.put("name", chatName);
-            body.put("chatID", Integer.parseInt(chatID));
+            body.put("name", HARD_CODED_CHAT_NAME);
+            body.put("chatID", HARD_CODED_CHAT_ID);
         } catch (JSONException e) {
             e.printStackTrace();
         }

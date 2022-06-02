@@ -16,6 +16,6 @@ public class ChatModel implements Serializable {
     }
 
     public String getChatName() {
-        return Integer.toString(chatID);
+        return chatName;
     }
 }
