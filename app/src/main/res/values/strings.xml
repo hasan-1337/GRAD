@@ -48,10 +48,20 @@
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
+    <string name="switch_sign_in">Remember Me</string>
+    <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
+    <string name="keys_prefs_jwt">Sharded Prefs JWT</string>
+    <string name="action_sign_out">Sign Out</string>
+
     <string name="sync_title">Sync email periodically</string>
     <string name="attachment_title">Download incoming attachments</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="create_chat">Create A New Chat</string>
+    <string name="create_chat_name">Chat Name</string>
+    <string name="confirm_new_chat">Create New Chat</string>
+    <string name="cancel">Cancel</string>
+    <string name="create_chat_id">Chat ID</string>
 
 </resources>

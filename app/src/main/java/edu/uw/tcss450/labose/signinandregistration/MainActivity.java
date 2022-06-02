@@ -1,8 +1,12 @@
 package edu.uw.tcss450.labose.signinandregistration;
 
+import static edu.uw.tcss450.labose.signinandregistration.Notifications.CHANNEL_1_ID;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -12,10 +16,12 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +33,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
@@ -37,11 +45,11 @@ import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppBarConfiguration mAppBarConfiguration;
-
+    private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
+    private NotificationManagerCompat notificationManager;
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -71,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        notificationManager = NotificationManagerCompat.from(this);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -79,10 +89,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
-
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.navigation_chat) {
                 mNewMessageModel.reset();
+                Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+                notifyThis("GRAD", "New chat message received.");
+            } else if (destination.getId() == R.id.navigation_contacts || destination.getId() == R.id.navigation_weather) {
+                Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
         });
 
@@ -92,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             if (count > 0) {
                 badge.setNumber(count);
                 badge.setVisible(true);
+                notifyThis("GRAD", "New chat message received.");
             } else {
                 badge.clearNumber();
                 badge.setVisible(false);
@@ -112,6 +128,19 @@ public class MainActivity extends AppCompatActivity {
             requestLocation();
         }
         createLocationRequest();
+    }
+
+    public void notifyThis(final String title, final String message) {
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentText(message)
+                .setContentInfo("INFO")
+                .build();
+
+        notificationManager.notify(1, notification);
     }
 
     private class MainPushMessageReceiver extends BroadcastReceiver {
@@ -152,8 +181,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.action_logout:
-                startActivity(new Intent(this, AuthActivity.class));
                 finish();
+                signOut();
+                startActivity(new Intent(this, AuthActivity.class));
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
@@ -239,5 +269,15 @@ public class MainActivity extends AppCompatActivity {
         // application will never receive updates faster than this value.
         mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
         mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    private void signOut() {
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+        prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
+        //End the app completely
+        finishAndRemoveTask();
     }
 }
