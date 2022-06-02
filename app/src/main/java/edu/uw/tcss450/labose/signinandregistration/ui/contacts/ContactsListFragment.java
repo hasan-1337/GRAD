@@ -20,6 +20,8 @@ import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatRecyclerViewAdapter;
+import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs.CreateChatDialogFragment;
+import edu.uw.tcss450.labose.signinandregistration.ui.contacts.contactsdialogs.AddContactDialogFragment;
 
 public class ContactsListFragment extends Fragment {
 
@@ -67,6 +69,11 @@ public class ContactsListFragment extends Fragment {
 
         //@Override
         binding.contactsAdd.setOnClickListener(v -> {
+
+            new AddContactDialogFragment().show(
+                    getChildFragmentManager(), AddContactDialogFragment.TAG
+            );
+
             // Add a contact
             Log.e("Button", "Contacts Button");
         });

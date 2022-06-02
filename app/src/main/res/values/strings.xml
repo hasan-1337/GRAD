@@ -66,5 +66,10 @@
     <string name="cancel">Cancel</string>
     <string name="create_chat_id">Chat ID</string>
     <string name="join_chat">Join a chat</string>
+    <string name="add_contact_id">Contact ID</string>
+    <string name="contact_fname">Contact First Name</string>
+    <string name="contact_lname">Contact Last Name</string>
+    <string name="contact_email">Contact Email</string>
+    <string name="contact_uid">Contact User ID</string>
 
 </resources>
