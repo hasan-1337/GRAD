@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
-        tools:context="edu.uw.tcss450.uiandnavigationlab.ui.blog.BlogListFragment"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:listitem="@layout/item_chat" />

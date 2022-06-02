@@ -28,6 +28,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
@@ -80,10 +82,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
-
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.navigation_chat) {
                 mNewMessageModel.reset();
+                Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+            } else if (destination.getId() == R.id.navigation_contacts || destination.getId() == R.id.navigation_weather) {
+                Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
         });
 
@@ -153,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             case R.id.action_logout:
-                startActivity(new Intent(this, AuthActivity.class));
                 finish();
                 signOut();
+                startActivity(new Intent(this, AuthActivity.class));
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
