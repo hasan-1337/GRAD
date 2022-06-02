@@ -2,16 +2,15 @@ package edu.uw.tcss450.labose.signinandregistration.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -218,7 +217,6 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 if (coordinates == null) {
                     coordinates = new LatLng(location.getLatitude(), location.getLongitude());
                 }
-
                 getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
                 getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
                 getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");

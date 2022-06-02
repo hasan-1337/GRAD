@@ -48,4 +48,5 @@ dependencies {
     implementation 'me.pushy:sdk:1.0.82'
     implementation 'com.google.android.gms:play-services-location:19.0.1'
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
 }
