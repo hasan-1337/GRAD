@@ -46,7 +46,7 @@ public class AddContactDialogViewModel extends AndroidViewModel {
             body.put("firstname", contactFName);
             body.put("lastname", contactLName);
             body.put("email", contactEmail);
-            body.put("chatId", Integer.parseInt(chatID));
+            body.put("chatid", Integer.parseInt(chatID));
         } catch (JSONException e) {
             e.printStackTrace();
         }
