@@ -20,6 +20,7 @@ import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBindi
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatlistBinding;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
+import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.createchatdialog.CreateChatDialogFragment;
 
 public class ChatListFragment extends Fragment {
 
@@ -66,7 +67,11 @@ public class ChatListFragment extends Fragment {
 
         //@Override
         binding.chatAdd.setOnClickListener(v -> {
-            // Add a contact
+
+            new CreateChatDialogFragment().show(
+                    getChildFragmentManager(), CreateChatDialogFragment.TAG
+            );
+
             Log.e("Button", "Chat Button");
         });
     }
