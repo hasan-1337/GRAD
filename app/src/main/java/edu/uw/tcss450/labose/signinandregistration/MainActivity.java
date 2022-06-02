@@ -1,8 +1,12 @@
 package edu.uw.tcss450.labose.signinandregistration;
 
+import static edu.uw.tcss450.labose.signinandregistration.Notifications.CHANNEL_1_ID;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -12,6 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
+    private NotificationManagerCompat notificationManager;
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -74,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        notificationManager = NotificationManagerCompat.from(this);
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 mNewMessageModel.reset();
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
+                notifyThis("GRAD", "New chat message received.");
             } else if (destination.getId() == R.id.navigation_contacts || destination.getId() == R.id.navigation_weather) {
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -99,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             if (count > 0) {
                 badge.setNumber(count);
                 badge.setVisible(true);
+                notifyThis("GRAD", "New chat message received.");
             } else {
                 badge.clearNumber();
                 badge.setVisible(false);
@@ -119,6 +129,19 @@ public class MainActivity extends AppCompatActivity {
             requestLocation();
         }
         createLocationRequest();
+    }
+
+    public void notifyThis(final String title, final String message) {
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(title)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentText(message)
+                .setContentInfo("INFO")
+                .build();
+
+        notificationManager.notify(1, notification);
     }
 
     private class MainPushMessageReceiver extends BroadcastReceiver {
