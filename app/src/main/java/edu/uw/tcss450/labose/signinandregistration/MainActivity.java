@@ -45,8 +45,7 @@ import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppBarConfiguration mAppBarConfiguration;
-
+    private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
