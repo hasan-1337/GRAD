@@ -1,6 +1,7 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.contacts;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,7 @@ public class ContactsListFragment extends Fragment {
 
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
 
-        final RecyclerView rv = binding.recyclerChatlist;
+        final RecyclerView rv = binding.recyclerContactlist;
 
         ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
 
@@ -58,7 +59,7 @@ public class ContactsListFragment extends Fragment {
 
         mModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
             if(!contactList.isEmpty()) {
-                binding.recyclerChatlist.setAdapter(
+                binding.recyclerContactlist.setAdapter(
                         new ContactsRecyclerViewAdapter(contactList)
                 );
             }
@@ -67,7 +68,7 @@ public class ContactsListFragment extends Fragment {
         //@Override
         binding.contactsAdd.setOnClickListener(v -> {
             // Add a contact
-
+            Log.e("Button", "Contacts Button");
         });
     }
 }
