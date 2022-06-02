@@ -3,15 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat.xml" value="0.32382246376811596" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat_message.xml" value="0.32382246376811596" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chatlist.xml" value="0.2" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_contacts.xml" value="0.32382246376811596" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_create_chat_dialog.xml" value="0.5" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_settings.xml" value="0.34556159420289856" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_sign.xml" value="0.32382246376811596" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/item_chat.xml" value="0.2" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450/app/src/main/res/layout/fragment_home.xml" value="0.32382246376811596" />
         <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/drawable/ic_chat_80dp.xml" value="0.311" />
         <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450-sprint-2/app/src/main/res/drawable/ic_contact_grey_80.xml" value="0.2305" />
@@ -31,6 +22,7 @@
         <entry key="..\:/Users/Naomi/StudioProjects/Team-2-TCSS-450/app/src/main/res/layout/activity_main.xml" value="0.8663366336633663" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/activity_auth.xml" value="0.2552083333333333" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/activity_main.xml" value="0.2552083333333333" />
+        <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_add_chat_member_dialog.xml" value="0.39794871794871794" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chat.xml" value="0.2125" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chat_message.xml" value="0.2125" />
         <entry key="..\:/Users/Naomi/StudioProjects/tcss-450-sprint3/app/src/main/res/layout/fragment_chatlist.xml" value="0.1" />

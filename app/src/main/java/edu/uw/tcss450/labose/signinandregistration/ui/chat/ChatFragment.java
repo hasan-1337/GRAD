@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import edu.uw.tcss450.labose.signinandregistration.MainActivityArgs;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
+import edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs.AddChatMemberDialogFragment;
+import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs.CreateChatDialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,5 +95,14 @@ public class ChatFragment extends Fragment {
         binding.buttonSend.setOnClickListener(button -> mSendModel.sendMessage(mChatID, mUserModel.getmJwt(), binding.editMessage.getText().toString()));
 //when we get the response back from the server, clear the edittext
         mSendModel.addResponseObserver(getViewLifecycleOwner(), response -> binding.editMessage.setText(""));
+
+        binding.chatAddContacts.setOnClickListener(v -> {
+
+            new AddChatMemberDialogFragment().show(
+                    getChildFragmentManager(), AddChatMemberDialogFragment.TAG
+            );
+
+            Log.e("Button", "Chat Button");
+        });
     }
 }

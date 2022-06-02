@@ -65,5 +65,6 @@
     <string name="confirm_new_chat">Create New Chat</string>
     <string name="cancel">Cancel</string>
     <string name="create_chat_id">Chat ID</string>
+    <string name="join_chat">Join a chat</string>
 
 </resources>

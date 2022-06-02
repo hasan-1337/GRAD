@@ -1,4 +1,4 @@
-package edu.uw.tcss450.labose.signinandregistration.ui.chatlist.createchatdialog;
+package edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentCreateChatDialogBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
-import edu.uw.tcss450.labose.signinandregistration.ui.contacts.ContactsListViewModel;
 
 public class CreateChatDialogFragment extends DialogFragment {
 
