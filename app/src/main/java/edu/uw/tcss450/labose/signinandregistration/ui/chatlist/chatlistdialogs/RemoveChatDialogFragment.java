@@ -33,7 +33,7 @@ public class RemoveChatDialogFragment extends DialogFragment {
 //        LayoutInflater inflater = requireActivity().getLayoutInflater();
 //        mBinding = FragmentCreateChatDialogBinding.inflate(inflater);
 //
-//        builder.setView(inflater.inflate(R.layout.fragment_create_chat_dialog, mBinding.getRoot()));
+//        builder.setView(mBinding.getRoot().getRootView());
 //        builder.setPositiveButton(R.string.confirm_new_chat, new DialogInterface.OnClickListener() {
 //            @Override
 //            public void onClick(DialogInterface dialog, int id) {
