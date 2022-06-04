@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Locale;
+import java.util.Objects;
+
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.SettingsActivity;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentHomeBinding;
@@ -38,11 +41,19 @@ public class HomeFragment extends Fragment {
         bind.setting.setOnClickListener(this::goSetting);
         bind.forecast.setOnClickListener(this::goWeather);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
-        String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
-        JWT jwt = new JWT(token);
+        final SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
+        final JWT jwt = new JWT(prefs.getString(getString(R.string.keys_prefs_jwt), ""));
         String email = jwt.getClaim("email").asString();
-        bind.username.setText(email);
+
+        for (int i = 0; i <= Objects.requireNonNull(email).length(); i++) {
+            if (email.charAt(i) == '@') {
+                email = email.substring(0, i);
+                email = email.substring(0, 1).toUpperCase() + email.substring(1);
+                break;
+            }
+        }
+
+        bind.username.setText("Welcome " + email);
     }
 
     public void goContacts(final View view) {

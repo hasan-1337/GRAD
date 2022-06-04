@@ -46,7 +46,17 @@ public class SettingsFragment extends Fragment {
 
         final SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
         final JWT jwt = new JWT(prefs.getString(getString(R.string.keys_prefs_jwt), ""));
-        binding.email.setText(jwt.getClaim("email").asString());
+        String email = jwt.getClaim("email").asString();
+        binding.email.setText(email);
+
+        for (int i = 0; i <= Objects.requireNonNull(email).length(); i++) {
+            if (email.charAt(i) == '@') {
+                email = email.substring(0, i);
+                email = email.substring(0, 1).toUpperCase() + email.substring(1);
+                break;
+            }
+        }
+        binding.username.setText(email);
     }
 
     private void switchNightMode(final CompoundButton compoundButton, final boolean b) {
