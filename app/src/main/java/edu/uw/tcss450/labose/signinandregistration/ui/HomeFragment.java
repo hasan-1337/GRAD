@@ -1,6 +1,8 @@
 package edu.uw.tcss450.labose.signinandregistration.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
@@ -34,6 +37,12 @@ public class HomeFragment extends Fragment {
         bind.chat.setOnClickListener(this::goChat);
         bind.setting.setOnClickListener(this::goSetting);
         bind.forecast.setOnClickListener(this::goWeather);
+
+        SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
+        String token = prefs.getString(getString(R.string.keys_prefs_jwt), "");
+        JWT jwt = new JWT(token);
+        String email = jwt.getClaim("email").asString();
+        bind.username.setText(email);
     }
 
     public void goContacts(final View view) {

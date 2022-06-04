@@ -69,9 +69,7 @@ public class SignInFragment extends Fragment {
 
         binding.buttonSignIn.setOnClickListener(this::attemptSignIn);
 
-        mSignInModel.addResponseObserver(
-                getViewLifecycleOwner(),
-                this::observeResponse);
+        mSignInModel.addResponseObserver(getViewLifecycleOwner(), this::observeResponse);
 
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         binding.editEmail.setText(args.getEmail().equals("default") ? "" : args.getEmail());

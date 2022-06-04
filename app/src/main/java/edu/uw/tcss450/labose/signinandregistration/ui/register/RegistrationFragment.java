@@ -37,13 +37,13 @@ public class RegistrationFragment extends Fragment {
 
     private RegistrationViewModel mRegisterModel;
 
-    private PasswordValidator mNameValidator = checkPwdLength(1);
+    private final PasswordValidator mNameValidator = checkPwdLength(1);
 
-    private PasswordValidator mEmailValidator = checkPwdLength(2)
+    private final PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
 
-    private PasswordValidator mPassWordValidator =
+    private final PasswordValidator mPassWordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.editPassword2.getText().toString()))
                     .and(checkPwdLength(7))
                     .and(checkPwdSpecialChar())
@@ -166,6 +166,5 @@ public class RegistrationFragment extends Fragment {
         } else {
             Log.d("JSON Response", "No Response");
         }
-
     }
 }

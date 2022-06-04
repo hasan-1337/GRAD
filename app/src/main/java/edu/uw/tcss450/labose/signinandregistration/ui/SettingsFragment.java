@@ -15,8 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
+import com.auth0.android.jwt.JWT;
+
 import java.util.Objects;
 
+import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
@@ -24,7 +27,7 @@ public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final @NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater);
         // Inflate the layout for this fragment
         return binding.getRoot();
@@ -40,6 +43,10 @@ public class SettingsFragment extends Fragment {
         binding.weather.setChecked(sharedPreferences.getBoolean("isFahrenheitOn", true));
         binding.nightmode.setOnCheckedChangeListener(this::switchNightMode);
         binding.weather.setOnCheckedChangeListener(this::switchWeather);
+
+        final SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
+        final JWT jwt = new JWT(prefs.getString(getString(R.string.keys_prefs_jwt), ""));
+        binding.email.setText(jwt.getClaim("email").asString());
     }
 
     private void switchNightMode(final CompoundButton compoundButton, final boolean b) {
