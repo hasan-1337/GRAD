@@ -42,11 +42,11 @@ public class AddContactDialogViewModel extends AndroidViewModel {
         JSONObject body = new JSONObject();
 
         try {
-            body.put("contactid", Integer.parseInt(contactID));
-            body.put("firstname", contactFName);
-            body.put("lastname", contactLName);
-            body.put("email", contactEmail);
-            body.put("chatid", Integer.parseInt(chatID));
+//            body.put("contactid", Integer.parseInt(contactID));
+            body.put("FirstName", contactFName);
+            body.put("LastName", contactLName);
+            body.put("Email", contactEmail);
+            body.put("ChatId", Integer.parseInt(chatID));
         } catch (JSONException e) {
             e.printStackTrace();
         }
