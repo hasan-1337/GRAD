@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/navigation_chatlist"
         android:name="edu.uw.tcss450.labose.signinandregistration.ui.chatlist.ChatListFragment"
-        android:label="ChatList"
+        android:label="Messages"
         tools:layout="@layout/fragment_chat">
         <action
             android:id="@+id/action_fragment_chatlist_to_chat"
