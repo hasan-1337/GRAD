@@ -82,12 +82,10 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 layoutParams.setMargins(extended, standard, standard, standard);
                 // Set this View to the right (end) side
                 ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity = Gravity.END;
-
-                card.setCardBackgroundColor(ColorUtils.setAlphaComponent(res.getColor(R.color.primaryColor, null), 16));
-                binding.textMessage.setTextColor(res.getColor(R.color.primaryDarkColor, null));
+                binding.textMessage.setTextColor(res.getColor(R.color.textColor, null));
 
                 card.setStrokeWidth(standard / 5);
-                card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.primaryDarkColor, null), 200));
+                card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.textColor, null), 200));
 
                 //Round the corners on the left side
                 card.setShapeAppearanceModel(card.getShapeAppearanceModel()
@@ -108,12 +106,10 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 // Set this View to the left (start) side
                 ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity = Gravity.START;
 
-                card.setCardBackgroundColor(ColorUtils.setAlphaComponent(res.getColor(R.color.secondaryDarkColor, null), 16));
-
                 card.setStrokeWidth(standard / 5);
-                card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.secondaryDarkColor, null), 200));
+                card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.textColor, null), 200));
 
-                binding.textMessage.setTextColor(res.getColor(R.color.secondaryColor, null));
+                binding.textMessage.setTextColor(res.getColor(R.color.textColor, null));
 
                 //Round the corners on the right side
                 card.setShapeAppearanceModel(card.getShapeAppearanceModel()

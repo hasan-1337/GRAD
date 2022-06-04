@@ -11,7 +11,7 @@
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/drawable/ic_baseline_remove_circle_24.xml" value="0.25" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/activity_auth.xml" value="0.25" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_add_contact_dialog.xml" value="0.371875" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat.xml" value="0.32382246376811596" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat_message.xml" value="0.32382246376811596" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chatlist.xml" value="0.2" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_contacts.xml" value="0.32382246376811596" />
@@ -19,7 +19,8 @@
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_settings.xml" value="0.34556159420289856" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_sign.xml" value="0.32382246376811596" />
-        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/item_chat.xml" value="0.2" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/item_chat.xml" value="0.1" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/item_contact.xml" value="0.1" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/menu/bottom_nav_menu.xml" value="0.371875" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/menu/toolbar.xml" value="0.371875" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1375" />
