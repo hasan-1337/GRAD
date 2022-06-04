@@ -227,6 +227,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onMapClick(final @NonNull LatLng latLng) {
         coordinates = latLng;
+        checkPreference();
         getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
         getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
         getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
