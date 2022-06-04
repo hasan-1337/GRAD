@@ -72,5 +72,9 @@
     <string name="contact_email">Contact Email</string>
     <string name="contact_uid">Contact User ID</string>
     <string name="add_contact">Add a new contact</string>
+    <string name="leave_chat">Leave a Chat</string>
+    <string name="user_email">User Email</string>
+    <string name="remove_contact">Remove a Contact</string>
+    <string name="remove_chat">Remove a Chat</string>
 
 </resources>
