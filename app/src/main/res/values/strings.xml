@@ -74,5 +74,6 @@
     <string name="add_contact">Add a new contact</string>
     <string name="leave_chat">Leave a Chat</string>
     <string name="user_email">User Email</string>
+    <string name="remove_contact">Remove a Contact</string>
 
 </resources>
