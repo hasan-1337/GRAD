@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/primaryColor">
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/remove_dialog_title"
@@ -14,14 +14,13 @@
         android:textSize="20sp"
         android:textStyle="bold|italic"
         android:textColor="@color/secondaryColor"
-        android:background="@color/primaryColor"
         android:contentDescription="@string/app_name" />
     <EditText
         android:id="@+id/remove_chat_id"
         android:inputType="textPersonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
@@ -34,7 +33,7 @@
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"

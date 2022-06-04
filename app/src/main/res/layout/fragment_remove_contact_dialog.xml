@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/primaryColor">
+    android:background="@color/backgroundColor">
 
     <TextView
         android:id="@+id/dialog_title"
@@ -14,14 +14,13 @@
         android:textSize="20sp"
         android:textStyle="bold|italic"
         android:textColor="@color/secondaryColor"
-        android:background="@color/primaryColor"
         android:contentDescription="@string/app_name" />
     <EditText
         android:id="@+id/remove_contact_id"
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
