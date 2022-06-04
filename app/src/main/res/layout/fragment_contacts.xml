@@ -31,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:contentDescription="@string/logo" />
+        android:contentDescription="@string/logo"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/contacts_remove"

@@ -10,6 +10,8 @@
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/drawable/ic_baseline_person_pin_24.xml" value="0.25" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/drawable/ic_baseline_remove_circle_24.xml" value="0.25" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/activity_auth.xml" value="0.25" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/activity_main.xml" value="0.2916666666666667" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/activity_settings.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_add_chat_member_dialog.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_add_contact_dialog.xml" value="0.371875" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_contacts.xml" value="0.32382246376811596" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_create_chat_dialog.xml" value="0.1" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_maps.xml" value="0.2916666666666667" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_remove_chat_dialog.xml" value="0.371875" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_remove_chat_member_dialog.xml" value="0.371875" />
         <entry key="..\:/Users/Hasan1/AndroidStudioProjects/Team-2-TCSS-450 clone/app/src/main/res/layout/fragment_remove_contact_dialog.xml" value="0.22" />
