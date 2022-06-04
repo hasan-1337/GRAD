@@ -61,7 +61,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        @SuppressLint("SetTextI18n")
+        @SuppressLint({"SetTextI18n", "ResourceAsColor"})
         void setMessage(final ChatMessage message) {
             final Resources res = mView.getContext().getResources();
             final MaterialCardView card = binding.cardRoot;
@@ -84,6 +84,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity = Gravity.END;
                 binding.textMessage.setTextColor(res.getColor(R.color.textColor, null));
 
+                card.setCardBackgroundColor(res.getColor(R.color.backgroundColor, null));
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.textColor, null), 200));
 
@@ -106,6 +107,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
                 // Set this View to the left (start) side
                 ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity = Gravity.START;
 
+                card.setCardBackgroundColor(res.getColor(R.color.backgroundColor, null));
                 card.setStrokeWidth(standard / 5);
                 card.setStrokeColor(ColorUtils.setAlphaComponent(res.getColor(R.color.textColor, null), 200));
 
