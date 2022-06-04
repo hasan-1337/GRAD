@@ -33,7 +33,7 @@ public class AddChatMemberDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         mBinding = FragmentAddChatMemberDialogBinding.inflate(inflater);
 
-        builder.setView(inflater.inflate(R.layout.fragment_add_chat_member_dialog, mBinding.getRoot()));
+        builder.setView(mBinding.getRoot().getRootView());
         builder.setPositiveButton(R.string.confirm_new_chat, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
