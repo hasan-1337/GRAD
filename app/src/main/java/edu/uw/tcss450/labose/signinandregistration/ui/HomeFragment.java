@@ -1,12 +1,18 @@
 package edu.uw.tcss450.labose.signinandregistration.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Locale;
 import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
@@ -32,6 +37,7 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -54,6 +60,28 @@ public class HomeFragment extends Fragment {
         }
 
         bind.username.setText("Welcome " + email);
+        customizeText(bind.username, email);
+    }
+
+    /**
+     * Customize a text in TextView
+     * @param tv TextView or Edittext or Button or child of TextView class
+     * @param textToChange Text to highlight
+     */
+    private void customizeText(TextView tv, String textToChange) {
+        String tvt = tv.getText().toString();
+        int ofe = tvt.indexOf(textToChange, 0);
+        SpannableString wordToSpan = new SpannableString(tv.getText());
+
+        for (int ofs = 0; ofs < tvt.length() && ofe != -1; ofs = ofe + 1) {
+            ofe = tvt.indexOf(textToChange, ofs);
+            if (ofe == -1) {
+                break;
+            } else {
+                wordToSpan.setSpan(new ForegroundColorSpan(Color.RED), ofe, ofe + textToChange.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                tv.setText(wordToSpan, TextView.BufferType.SPANNABLE);
+            }
+        }
     }
 
     public void goContacts(final View view) {
