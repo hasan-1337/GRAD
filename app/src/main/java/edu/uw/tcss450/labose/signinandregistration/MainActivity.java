@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.navigation_chat) {
+            if (destination.getId() == R.id.navigation_chat || destination.getId() == R.id.navigation_chatlist) {
                 mNewMessageModel.reset();
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
-                notifyThis("GRAD", "New chat message received.");
+                //notifyThis("GRAD", "New chat message received.");
             } else if (destination.getId() == R.id.navigation_contacts || destination.getId() == R.id.navigation_weather) {
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
