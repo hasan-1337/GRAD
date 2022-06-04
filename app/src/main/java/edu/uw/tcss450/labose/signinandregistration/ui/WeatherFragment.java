@@ -3,6 +3,8 @@ package edu.uw.tcss450.labose.signinandregistration.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -30,6 +33,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentWeatherBinding;
@@ -55,6 +62,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         return inflater.inflate(R.layout.fragment_weather, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -71,6 +79,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         mapFragment.getMapAsync(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void getWeatherDetails(final View view) {
         final String city = mBinding.etCity.getText().toString().trim();
         checkPreference();
@@ -98,15 +107,15 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
             }
 
             if (bZipcode) {
-                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&postal_code=" + city + "&country=US&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             } else {
-                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&city=" + city + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?&city=" + city + "&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
             }
         }
     }
 
     private void checkPreference() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         temperature = sharedPreferences.getBoolean("isFahrenheitOn", true);
     }
 
@@ -185,6 +194,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         requestQueue.add(stringRequest);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void getWeatherDaily(final String url) {
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             final StringBuilder output = new StringBuilder();
@@ -192,13 +202,17 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
             try {
                 final JSONObject jsonResponse = new JSONObject(response);
                 final JSONArray jsonArray = jsonResponse.getJSONArray("data");
-                for (int i = 0; i < jsonArray.length(); i++) {
+                for (int i = 1; i < jsonArray.length(); i++) {
                     final JSONObject jsonobject = jsonArray.getJSONObject(i);
                     final double temp = jsonobject.getDouble("temp");
                     final int humidity = jsonobject.getInt("rh");
                     final double wind = jsonobject.getDouble("wind_spd");
                     final String clouds = jsonobject.getString("clouds");
-                    output.append(" Day ").append(i + 1).append("\n").append(df.format(getTemp(temp))).append((temperature)?" °F":" °C")
+                    final String dates = jsonobject.getString("datetime"); // "EEE, MMM d, yy"
+                    final DateTimeFormatter f = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
+                    final LocalDate localDate = LocalDate.parse(dates);
+
+                    output.append(localDate.format(f)).append("\n").append(df.format(getTemp(temp))).append((temperature)?" °F":" °C")
                             .append("\n Humidity: ").append(humidity).append("%").append("\n Wind Speed: ")
                             .append(df.format(wind)).append(" mph").append("\n Cloudiness: ").append(clouds).append("%\n\n");
                 }
@@ -212,14 +226,16 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         requestQueue.add(stringRequest);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMapClick(final @NonNull LatLng latLng) {
         coordinates = latLng;
         getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
         getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
-        getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+        getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(final @NonNull GoogleMap googleMap) {
@@ -236,7 +252,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
                 getWeatherCurrent("https://api.weatherbit.io/v2.0/current?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&units=I&key=51500e0f085741f591dc0356d9a03ff4");
                 getWeatherHourly("https://api.weatherbit.io/v2.0/forecast/hourly?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&hours=24&units=I&key=51500e0f085741f591dc0356d9a03ff4");
-                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&days=7&units=I&key=51500e0f085741f591dc0356d9a03ff4");
+                getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + coordinates.latitude + "&lon=" + coordinates.longitude + "&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
 
             }
         });
