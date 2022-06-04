@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primaryColor"
+    android:background="@color/backgroundColor"
     tools:context=".ui.SettingsFragment"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="User Name"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -37,7 +37,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginEnd="350dp"
         android:contentDescription="@string/home_description"
-        android:src="@drawable/ic_contacts_black_24dp"
+        android:src="@drawable/ic_contact_grey_80"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -49,7 +49,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginTop="53dp"
         android:text="Name"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -73,7 +73,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginTop="82dp"
         android:text="test@test.com"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -98,7 +98,7 @@
         android:layout_marginTop="132dp"
         android:checked="true"
         android:text="@string/night_mode"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -123,7 +123,7 @@
         android:layout_marginEnd="0dp"
         android:layout_marginTop="172dp"
         android:text="@string/weather_preference"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />

@@ -16,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
-import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBinding;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatlistBinding;
-import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
-import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.createchatdialog.CreateChatDialogFragment;
+import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs.CreateChatDialogFragment;
 
 public class ChatListFragment extends Fragment {
 

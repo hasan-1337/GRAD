@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_root"
-    android:background="@color/primaryColor"
+    android:background="@color/backgroundColor"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.chatlist.ChatListFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layoutManager="LinearLayoutManager"
+        tools:context=".ui.chatlist.ChatListRecyclerViewAdapter"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"
         tools:listitem="@layout/item_chat" />
@@ -47,5 +48,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         android:contentDescription="@string/logo" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

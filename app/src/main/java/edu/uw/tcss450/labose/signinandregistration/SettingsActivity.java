@@ -8,14 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
-public class SettingsActivity extends AppCompatActivity {
+import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingsBinding;
 
+public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_settings);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle("Settings");
+        setContentView(R.layout.activity_settings);
     }
 
     @Override

@@ -1,6 +1,12 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.register;
 
-import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.*;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkClientPredicate;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkExcludeWhiteSpace;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkPwdDigit;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkPwdLength;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkPwdLowerCase;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkPwdSpecialChar;
+import static edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator.checkPwdUpperCase;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +16,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentRegistrationBinding;
 import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
@@ -67,6 +76,8 @@ public class RegistrationFragment extends Fragment {
         binding.buttonRegister.setOnClickListener(this::attemptRegister);
         mRegisterModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
+
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Registration");
     }
 
     private void attemptRegister(final View button) {

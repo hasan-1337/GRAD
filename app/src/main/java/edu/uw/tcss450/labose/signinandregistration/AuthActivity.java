@@ -1,9 +1,11 @@
 package edu.uw.tcss450.labose.signinandregistration;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
 
 import edu.uw.tcss450.labose.signinandregistration.model.PushyTokenViewModel;
 import me.pushy.sdk.Pushy;
@@ -18,6 +20,16 @@ public class AuthActivity extends AppCompatActivity {
         Pushy.listen(this);
         initiatePushyTokenRequest();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", true);
+
+        // When user reopens the app
+        // after applying dark/light mode
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
     private void initiatePushyTokenRequest() {
         new ViewModelProvider(this).get(PushyTokenViewModel.class).retrieveToken();

@@ -4,15 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+    android:background="@color/backgroundColor"
     tools:context=".ui.register.RegistrationFragment">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="240dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/home_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="@string/logo"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_fifty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <EditText
         android:id="@+id/edit_email"
@@ -24,7 +47,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/hint_email"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/edit_password_1"
@@ -40,7 +63,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/hint_last"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edit_email"
@@ -57,7 +80,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/hint_first"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/edit_last"
@@ -74,7 +97,7 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/hint_password"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/guideline_fifty"
@@ -91,7 +114,7 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/hint_password_again"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"

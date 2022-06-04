@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -21,6 +22,8 @@ import com.auth0.android.jwt.JWT;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSignBinding;
@@ -74,6 +77,7 @@ public class SignInFragment extends Fragment {
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         binding.editEmail.setText(args.getEmail().equals("default") ? "" : args.getEmail());
         binding.editPassword.setText(args.getPassword().equals("default") ? "" : args.getPassword());
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle("Sign In");
     }
 
     private void attemptSignIn(final View button) {
@@ -112,10 +116,7 @@ public class SignInFragment extends Fragment {
             //Store the credentials in SharedPrefs
             prefs.edit().putString(getString(R.string.keys_prefs_jwt), jwt).apply();
         }
-        Navigation.findNavController(getView())
-                .navigate(SignInFragmentDirections
-                        .actionFragmentSignToMainActivity(email,jwt));
-        //Remove THIS activity from the Task list. Pops off the backstack
+        Navigation.findNavController(getView()).navigate(SignInFragmentDirections.actionFragmentSignToMainActivity(email,jwt));
         getActivity().finish();
     }
 

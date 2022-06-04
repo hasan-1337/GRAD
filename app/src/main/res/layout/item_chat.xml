@@ -23,13 +23,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/primaryColor">
+            android:background="@color/backgroundColor">
 
             <ImageView
                 android:id="@+id/chat_img"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_contacts_black_24dp"
+                android:src="@drawable/ic_contact_grey_80"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +43,7 @@
                 android:paddingStart="8dp"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="24sp"
-                android:textColor="@color/secondaryColor"
+                android:textColor="@color/textColor"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/chat_img"

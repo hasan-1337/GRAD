@@ -1,6 +1,8 @@
 package edu.uw.tcss450.labose.signinandregistration.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
 
     private FragmentWeatherBinding mBinding;
     private GoogleMap mMap;
+    private boolean temperature;
     private static String hourly;
     private static String current;
     private static String daily;
@@ -55,6 +58,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        checkPreference();
 
         mBinding = FragmentWeatherBinding.bind(getView());
         mBinding.hourlyWeather.setText(hourly);
@@ -69,6 +73,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
 
     public void getWeatherDetails(final View view) {
         final String city = mBinding.etCity.getText().toString().trim();
+        checkPreference();
 
         if (city.length() > 0) {
             boolean bZipcode;
@@ -100,6 +105,18 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         }
     }
 
+    private void checkPreference() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        temperature = sharedPreferences.getBoolean("isFahrenheitOn", true);
+    }
+
+    private double getTemp(final double temp) {
+        if (!temperature) {
+            return (temp - 32) / 1.8;
+        }
+        return temp;
+    }
+
     private void getWeatherCurrent(final String url) {
         // Resend the request to retrieve the current forecast.
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -120,8 +137,8 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                 mMap.addMarker(new MarkerOptions().position(coordinates));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, mMap.getCameraPosition().zoom));
                 output.append(" Current Forecast in\n").append(state).append(" (").
-                        append(countryCode).append(")").append("\n\n").append(df.format(temp)).
-                        append(" °F").append("\n Humidity: ").append(humidity).append("%").
+                        append(countryCode).append(")").append("\n\n").append(df.format(getTemp(temp))).
+                        append((temperature)?" °F":" °C").append("\n Humidity: ").append(humidity).append("%").
                         append("\n Wind Speed: ").append(df.format(wind)).append(" mph").
                         append("\n Cloudiness: ").append(clouds).append("%\n\n");
                 current = output.toString();
@@ -156,7 +173,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                         output.append(String.format("%-12s", x + " PM"));
                     }
 
-                    output2.append(df.format(temp)).append(String.format("%-8s", " °F"));
+                    output2.append(df.format(getTemp(temp))).append(String.format("%-8s", (temperature)?" °F":" °C"));
                 }
                 hourly = output + "\n" + output2;
                 mBinding.hourlyWeather.setText(hourly); // Fill up the textview with the weather data
@@ -181,7 +198,7 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
                     final int humidity = jsonobject.getInt("rh");
                     final double wind = jsonobject.getDouble("wind_spd");
                     final String clouds = jsonobject.getString("clouds");
-                    output.append(" Day ").append(i + 1).append("\n").append(df.format(temp)).append(" °F")
+                    output.append(" Day ").append(i + 1).append("\n").append(df.format(getTemp(temp))).append((temperature)?" °F":" °C")
                             .append("\n Humidity: ").append(humidity).append("%").append("\n Wind Speed: ")
                             .append(df.format(wind)).append(" mph").append("\n Cloudiness: ").append(clouds).append("%\n\n");
                 }

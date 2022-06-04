@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void goChat(final View view) {
-        ((BottomNavigationView) getActivity().findViewById(R.id.nav_view)).setSelectedItemId(R.id.navigation_chat);
+        ((BottomNavigationView) getActivity().findViewById(R.id.nav_view)).setSelectedItemId(R.id.navigation_chatlist);
     }
 
     public void goSetting(final View view) {

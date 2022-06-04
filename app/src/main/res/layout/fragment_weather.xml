@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.WeatherFragment"
-    android:background="@color/primaryColor"
+    android:background="@color/backgroundColor"
     android:padding="8dp"
     android:id="@+id/background">
 
@@ -38,7 +38,7 @@
             android:hint="@string/weather_input"
             android:inputType="textPersonName"
             android:textColorHint="@color/primaryLightColor"
-            android:textColor="@color/primaryDarkColor"
+            android:textColor="@color/textColor"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="155dp"
             android:gravity="center"
-            android:textColor="@color/primaryDarkColor"
+            android:textColor="@color/textColor"
             android:textSize="18sp"
             android:textStyle="bold|italic" />
 
@@ -69,7 +69,7 @@
                 android:id="@+id/hourlyWeather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primaryDarkColor"
+                android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:textStyle="bold|italic" />
         </HorizontalScrollView>

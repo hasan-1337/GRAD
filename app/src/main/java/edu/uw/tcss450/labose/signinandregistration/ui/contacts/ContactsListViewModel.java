@@ -94,7 +94,7 @@ public class ContactsListViewModel extends AndroidViewModel {
     }
 
     public void connectGet(final String jwt) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
+        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
 
         final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.GET,

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+    android:background="@color/backgroundColor"
+    android:id="@+id/SignInFragment"
     tools:context=".ui.signin.SignInFragment">
 
     <ImageView
@@ -26,7 +27,7 @@
         android:text="@string/logo"
         android:textSize="40sp"
         android:textStyle="bold|italic"
-        android:textColor="#fff"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
@@ -43,7 +44,7 @@
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:textColorHint="@color/primaryLightColor"
         app:layout_constraintBottom_toTopOf="@+id/guideline_fifty"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +70,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="@color/primaryLightColor"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline_fifty" />
@@ -102,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:checked="true"
-        android:textColor="@color/primaryDarkColor"
+        android:textColor="@color/textColor"
         android:text="@string/switch_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
