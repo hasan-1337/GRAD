@@ -4,11 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.graphics.ColorUtils;
@@ -154,7 +151,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
          */
         private void customizeText(TextView tv, String textToChange, int color) {
             String tvt = tv.getText().toString();
-            int ofe = tvt.indexOf(textToChange, 0);
+            int ofe = tvt.indexOf(textToChange);
             SpannableString wordToSpan = new SpannableString(tv.getText());
 
             for (int ofs = 0; ofs < tvt.length() && ofe != -1; ofs = ofe + 1) {
