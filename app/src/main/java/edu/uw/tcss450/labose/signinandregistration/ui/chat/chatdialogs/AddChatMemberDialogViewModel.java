@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class AddChatMemberDialogViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    private final MutableLiveData<JSONObject> mResponse;
 
     public AddChatMemberDialogViewModel(@NonNull Application application) {
         super(application);
@@ -35,17 +35,16 @@ public class AddChatMemberDialogViewModel extends AndroidViewModel {
     }
 
     public void connectPut(final String jwt, final String chatID) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats";
-
-        JSONObject body = new JSONObject();
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats";
+        final JSONObject body = new JSONObject();
 
         try {
             body.put("chatId", Integer.parseInt(chatID));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
-        Request request = new JsonObjectRequest(
+        final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.PUT,
                 url,
                 body,

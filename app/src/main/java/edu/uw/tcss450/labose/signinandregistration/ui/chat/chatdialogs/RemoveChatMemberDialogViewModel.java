@@ -23,7 +23,7 @@ public class RemoveChatMemberDialogViewModel extends AndroidViewModel {
 
     private final MutableLiveData<JSONObject> mResponse;
 
-    public RemoveChatMemberDialogViewModel(@NonNull Application application) {
+    public RemoveChatMemberDialogViewModel(final @NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
@@ -35,15 +35,14 @@ public class RemoveChatMemberDialogViewModel extends AndroidViewModel {
     }
 
     public void connectDelete(final String jwt, final String chatID, final String email) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats";
-
-        JSONObject body = new JSONObject();
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats";
+        final JSONObject body = new JSONObject();
 
         try {
             body.put("chatId", Integer.parseInt(chatID));
             body.put("email", email);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

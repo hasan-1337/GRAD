@@ -35,14 +35,13 @@ public class RemoveChatDialogViewModel extends AndroidViewModel {
     }
 
     public void connectDelete(final String jwt, final String chatID) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats" + chatID;
-
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats" + chatID;
         final JSONObject body = new JSONObject();
 
         try {
             body.put("chatId", Integer.parseInt(chatID));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(
