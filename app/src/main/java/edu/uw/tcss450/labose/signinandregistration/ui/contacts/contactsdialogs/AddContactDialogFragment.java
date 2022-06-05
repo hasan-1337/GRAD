@@ -6,8 +6,11 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentAddContactDialogBinding;
@@ -20,8 +23,9 @@ public class AddContactDialogFragment extends DialogFragment {
     UserViewModel mUserModel;
     FragmentAddContactDialogBinding mBinding;
 
+    @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(final Bundle savedInstanceState) {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserViewModel.class);
         mModel = provider.get(AddContactDialogViewModel.class);
@@ -34,21 +38,15 @@ public class AddContactDialogFragment extends DialogFragment {
         mBinding = FragmentAddContactDialogBinding.inflate(inflater);
 
         builder.setView(mBinding.getRoot().getRootView());
-        builder.setPositiveButton(R.string.confirm_new_chat, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                mModel.connectPost(mUserModel.getmJwt(),
-                        mBinding.newContactId.getText().toString(),
-                        mBinding.newContactFirstname.getText().toString(),
-                        mBinding.newContactLastname.getText().toString(),
-                        mBinding.newContactEmail.getText().toString(),
-                        mBinding.newContactUserId.getText().toString());
-            }
-        });
+        builder.setPositiveButton(R.string.confirm_new_chat, (dialog, id) -> mModel.connectPost(mUserModel.getmJwt(),
+                mBinding.newContactId.getText().toString(),
+                mBinding.newContactFirstname.getText().toString(),
+                mBinding.newContactLastname.getText().toString(),
+                mBinding.newContactEmail.getText().toString(),
+                mBinding.newContactUserId.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
-                        edu.uw.tcss450.labose.signinandregistration.ui.contacts.contactsdialogs
-                                .AddContactDialogFragment.this.getDialog().cancel());
+                        Objects.requireNonNull(AddContactDialogFragment.this.getDialog()).cancel());
 
         return builder.create();
     }

@@ -23,7 +23,7 @@ import java.util.Objects;
 
 
 public class RegistrationViewModel extends AndroidViewModel {
-    private MutableLiveData<JSONObject> mResponse;
+    private final MutableLiveData<JSONObject> mResponse;
 
     public RegistrationViewModel(@NonNull Application application) {
         super(application);
@@ -70,11 +70,11 @@ public class RegistrationViewModel extends AndroidViewModel {
             body.put("last", last);
             body.put("email", email);
             body.put("password", password);
-        } catch (JSONException e) {
+        } catch (final JSONException e) {
             e.printStackTrace();
         }
 
-        Request request = new JsonObjectRequest(
+        Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 body,

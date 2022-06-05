@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class AddContactDialogViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    private final MutableLiveData<JSONObject> mResponse;
 
     public AddContactDialogViewModel(@NonNull Application application) {
         super(application);
@@ -37,9 +37,9 @@ public class AddContactDialogViewModel extends AndroidViewModel {
     public void connectPost(final String jwt, final String contactID, final String contactFName,
                             final String contactLName, final String contactEmail,
                             final String chatID) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
 
-        JSONObject body = new JSONObject();
+        final JSONObject body = new JSONObject();
 
         try {
             body.put("contactid", Integer.parseInt(contactID));
@@ -47,11 +47,11 @@ public class AddContactDialogViewModel extends AndroidViewModel {
             body.put("lastname", contactLName);
             body.put("email", contactEmail);
             body.put("chatid", Integer.parseInt(chatID));
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
-        Request request = new JsonObjectRequest(
+        final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 body,

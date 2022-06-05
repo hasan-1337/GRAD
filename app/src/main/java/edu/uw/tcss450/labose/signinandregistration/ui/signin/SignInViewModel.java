@@ -26,7 +26,7 @@ import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
 public class SignInViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    private final MutableLiveData<JSONObject> mResponse;
 
     public SignInViewModel(@NonNull Application application) {
         super(application);
@@ -63,8 +63,8 @@ public class SignInViewModel extends AndroidViewModel {
         }
     }
     public void connect(final String name, final String password) {
-        String url = "https://team-2-tcss450-webservice.herokuapp.com/auth";
-        Request request = new JsonObjectRequest(
+        final String url = "https://team-2-tcss450-webservice.herokuapp.com/auth";
+        final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null, //no body for this get request

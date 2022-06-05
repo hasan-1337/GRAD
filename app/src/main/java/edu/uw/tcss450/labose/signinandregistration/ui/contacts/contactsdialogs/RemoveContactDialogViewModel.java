@@ -1,4 +1,4 @@
-package edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs;
+package edu.uw.tcss450.labose.signinandregistration.ui.contacts.contactsdialogs;
 
 import android.app.Application;
 import android.util.Log;
@@ -19,11 +19,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RemoveChatDialogViewModel extends AndroidViewModel {
-
+public class RemoveContactDialogViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
 
-    public RemoveChatDialogViewModel(@NonNull Application application) {
+    public RemoveContactDialogViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
@@ -34,14 +33,13 @@ public class RemoveChatDialogViewModel extends AndroidViewModel {
         throw new IllegalStateException(error.getMessage());
     }
 
-    public void connectDelete(final String jwt, final String chatID) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats" + chatID;
-
+    public void connectDelete(final String jwt, final String contactID) {
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
         final JSONObject body = new JSONObject();
 
         try {
-            body.put("chatId", Integer.parseInt(chatID));
-        } catch (JSONException e) {
+            body.put("contactId", Integer.parseInt(contactID));
+        } catch (final JSONException e) {
             e.printStackTrace();
         }
 
@@ -69,5 +67,4 @@ public class RemoveChatDialogViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
-
 }
