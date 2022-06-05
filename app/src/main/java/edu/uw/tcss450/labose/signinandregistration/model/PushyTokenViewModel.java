@@ -1,5 +1,6 @@
 package edu.uw.tcss450.labose.signinandregistration.model;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class PushyTokenViewModel extends AndroidViewModel {
      * AsyncTask is deprecated as of Android Q. It is fine to use here and for this
      * quarter. In your future Android development, look for an alternative solution.
      */
+    @SuppressLint("StaticFieldLeak")
     private class RegisterForPushNotificationsAsync extends AsyncTask<Void, Void, String> {
         protected String doInBackground(Void... params) {
             String deviceToken;
@@ -101,16 +103,15 @@ public class PushyTokenViewModel extends AndroidViewModel {
 
     /**
      * Send this Pushy device token to the web service.
-     * @param jwt
+     * @param jwt The service information
      * @throws IllegalStateException when this method is called before the token is retrieve
      */
     public void sendTokenToWebservice(final String jwt) {
-        if (mPushyToken.getValue().isEmpty()) {
+        if (Objects.requireNonNull(mPushyToken.getValue()).isEmpty()) {
             throw new IllegalStateException("No pushy token. Do NOT call until token is retrieved");
         }
 
-        String url = getApplication().getResources().getString(R.string.base_url_service) +
-                "auth";
+        final String url = getApplication().getResources().getString(R.string.base_url_service) + "auth";
 
         JSONObject body = new JSONObject();
         try {
@@ -165,5 +166,30 @@ public class PushyTokenViewModel extends AndroidViewModel {
                 Log.e("JSON PARSE", "JSON Parse Error in handleError");
             }
         }
+    }
+
+    public void deleteTokenFromWebservice(final String jwt) {
+        final String url = getApplication().getResources().getString(R.string.base_url_service) + "auth";
+        final Request<JSONObject> request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null,
+                mResponse::setValue,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
     }
 }

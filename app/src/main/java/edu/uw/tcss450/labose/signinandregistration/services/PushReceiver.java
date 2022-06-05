@@ -3,6 +3,7 @@ package edu.uw.tcss450.labose.signinandregistration.services;
 import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND;
 import static android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,7 +24,6 @@ import me.pushy.sdk.Pushy;
 public class PushReceiver extends BroadcastReceiver {
 
     public static final String RECEIVED_NEW_MESSAGE = "new message from pushy";
-
     private static final String CHANNEL_ID = "1";
 
     @Override
@@ -40,7 +40,7 @@ public class PushReceiver extends BroadcastReceiver {
         String typeOfMessage = intent.getStringExtra("type");
         ChatMessage message = null;
         int chatId = -1;
-        try{
+        try {
             message = ChatMessage.createFromJsonString(intent.getStringExtra("message"));
             chatId = intent.getIntExtra("chatid", -1);
         } catch (JSONException e) {
@@ -70,7 +70,7 @@ public class PushReceiver extends BroadcastReceiver {
             Intent i = new Intent(context, AuthActivity.class);
             i.putExtras(intent.getExtras());
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
                     i, PendingIntent.FLAG_UPDATE_CURRENT);
 
             //research more on notifications the how to display them
@@ -88,7 +88,7 @@ public class PushReceiver extends BroadcastReceiver {
 
             // Get an instance of the NotificationManager service
             NotificationManager notificationManager =
-                    (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+                    (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
             // Build the notification and display it
             notificationManager.notify(1, builder.build());

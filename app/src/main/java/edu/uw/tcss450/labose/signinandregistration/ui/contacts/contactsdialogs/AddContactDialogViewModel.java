@@ -37,7 +37,7 @@ public class AddContactDialogViewModel extends AndroidViewModel {
     public void connectPost(final String jwt, final String contactID, final String contactFName,
                             final String contactLName, final String contactEmail,
                             final String chatID) {
-        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
         final JSONObject body = new JSONObject();
 
         try {

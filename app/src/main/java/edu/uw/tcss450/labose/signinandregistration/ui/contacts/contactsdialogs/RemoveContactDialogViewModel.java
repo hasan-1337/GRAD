@@ -34,7 +34,7 @@ public class RemoveContactDialogViewModel extends AndroidViewModel {
     }
 
     public void connectDelete(final String jwt, final String contactID) {
-        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
         final JSONObject body = new JSONObject();
 
         try {

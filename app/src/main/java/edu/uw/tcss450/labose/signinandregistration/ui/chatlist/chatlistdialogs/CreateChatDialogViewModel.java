@@ -42,8 +42,8 @@ public class CreateChatDialogViewModel extends AndroidViewModel {
         try {
             body.put("name", chatName);
             body.put("chatID", Integer.parseInt(chatID));
-        } catch (final JSONException | NumberFormatException e) {
-            return;
+        } catch (final JSONException e) {
+            e.printStackTrace();
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

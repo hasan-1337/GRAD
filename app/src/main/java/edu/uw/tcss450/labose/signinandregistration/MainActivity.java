@@ -38,6 +38,7 @@ import java.util.Objects;
 import edu.uw.tcss450.labose.signinandregistration.databinding.ActivityMainBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.NewMessageCountViewModel;
+import edu.uw.tcss450.labose.signinandregistration.model.PushyTokenViewModel;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.services.PushReceiver;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
@@ -158,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
             if (intent.hasExtra("chatMessage")) {
                 ChatMessage cm = (ChatMessage) intent.getSerializableExtra("chatMessage");
 
-                assert nd != null;
                 if (nd.getId() != R.id.navigation_chat) {
                     mNewMessageModel.increment();
                 }
@@ -271,13 +271,21 @@ public class MainActivity extends AppCompatActivity {
         mLocationRequest.setPriority(com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 
-    public void signOut() {
+    private void signOut() {
         SharedPreferences prefs =
                 getSharedPreferences(
                         getString(R.string.keys_shared_prefs),
                         Context.MODE_PRIVATE);
         prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
         //End the app completely
-        finishAndRemoveTask();
+        PushyTokenViewModel model = new ViewModelProvider(this)
+                .get(PushyTokenViewModel.class);
+        //when we hear back from the web service quit
+        model.addResponseObserver(this, result -> finishAndRemoveTask());
+        model.deleteTokenFromWebservice(
+                new ViewModelProvider(this)
+                        .get(UserViewModel.class)
+                        .getmJwt()
+        );
     }
 }

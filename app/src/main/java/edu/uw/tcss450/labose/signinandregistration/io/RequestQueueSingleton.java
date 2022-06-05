@@ -16,7 +16,7 @@ public class RequestQueueSingleton {
     private static Context context;
 
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
+    private final ImageLoader mImageLoader;
 
     private RequestQueueSingleton(Context context) {
         RequestQueueSingleton.context = context;

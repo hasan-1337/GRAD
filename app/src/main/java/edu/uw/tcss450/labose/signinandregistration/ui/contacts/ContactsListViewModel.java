@@ -21,7 +21,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.IntFunction;
@@ -31,8 +30,8 @@ import edu.uw.tcss450.labose.signinandregistration.R;
 
 public class ContactsListViewModel extends AndroidViewModel {
 
-    private MutableLiveData<List<ContactModel>> mContactList;
-    private ArrayList<Integer> mContactIDs;
+    private final MutableLiveData<List<ContactModel>> mContactList;
+    private final ArrayList<Integer> mContactIDs;
 
     public ContactsListViewModel(@NonNull Application application) {
         super(application);
@@ -94,7 +93,7 @@ public class ContactsListViewModel extends AndroidViewModel {
     }
 
     public void connectGet(final String jwt) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contactssql";
+        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
 
         final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.GET,

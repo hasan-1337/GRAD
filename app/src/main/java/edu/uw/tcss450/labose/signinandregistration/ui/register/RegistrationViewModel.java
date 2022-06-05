@@ -87,7 +87,6 @@ public class RegistrationViewModel extends AndroidViewModel {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //Instantiate the RequestQueue and add the request to the queue
-        Volley.newRequestQueue(getApplication().getApplicationContext())
-                .add(request);
+        Volley.newRequestQueue(getApplication().getApplicationContext()).add(request);
     }
 }

@@ -34,7 +34,6 @@ import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
  */
 public class RegistrationFragment extends Fragment {
     private FragmentRegistrationBinding binding;
-
     private RegistrationViewModel mRegisterModel;
 
     private final PasswordValidator mNameValidator = checkPwdLength(1);
