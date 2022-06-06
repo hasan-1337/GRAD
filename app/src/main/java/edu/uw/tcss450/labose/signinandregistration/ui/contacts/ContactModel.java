@@ -2,6 +2,9 @@ package edu.uw.tcss450.labose.signinandregistration.ui.contacts;
 
 import java.io.Serializable;
 
+/**
+ * The Model used for the contact classes.
+ */
 public class ContactModel implements Serializable {
     int id;
     String name;

@@ -10,8 +10,15 @@ import androidx.lifecycle.ViewModelProvider;
 import edu.uw.tcss450.labose.signinandregistration.model.PushyTokenViewModel;
 import me.pushy.sdk.Pushy;
 
+/**
+ * Authentication Activity for login and registering.
+ */
 public class AuthActivity extends AppCompatActivity {
 
+    /**
+     * When the fragment is created.
+     * @param savedInstanceState Save object.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +39,18 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * When the back button is pressed.
+     */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
 
+    /**
+     * Start the Pushy Token Request
+     */
     private void initiatePushyTokenRequest() {
         new ViewModelProvider(this).get(PushyTokenViewModel.class).retrieveToken();
     }

@@ -33,14 +33,15 @@ public class RemoveContactDialogViewModel extends AndroidViewModel {
         throw new IllegalStateException(error.getMessage());
     }
 
-    public void connectDelete(final String jwt, final String contactID) {
+    public void connectDelete(final String jwt, final String contactID, final String user) {
         final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
         final JSONObject body = new JSONObject();
 
         try {
-            body.put("contactId", Integer.parseInt(contactID));
-        } catch (final JSONException e) {
-            e.printStackTrace();
+            body.put("ContactID", Integer.parseInt(contactID));
+            body.put("Username", user);
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

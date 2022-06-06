@@ -23,38 +23,56 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.IntFunction;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 
-
+/**
+ * The Contact List View Model class to handle the background.
+ */
 public class ContactsListViewModel extends AndroidViewModel {
 
+    // Live data object
     private final MutableLiveData<List<ContactModel>> mContactList;
+
+    // The Contact Ids
     private final ArrayList<Integer> mContactIDs;
 
-    public ContactsListViewModel(@NonNull Application application) {
+    /**
+     * Constructor
+     * @param application Application
+     */
+    public ContactsListViewModel(final @NonNull Application application) {
         super(application);
         mContactList = new MutableLiveData<>(new ArrayList<>());
-        mContactIDs = new ArrayList<Integer>();
+        mContactIDs = new ArrayList<>();
     }
 
-    public void addContactListObserver(@NonNull LifecycleOwner owner,
-                                       @NonNull Observer<? super List<ContactModel>> observer) {
+    /**
+     * Listens to any changes for contacts.
+     * @param owner Owner object
+     * @param observer Observer object
+     */
+    public void addContactListObserver(final @NonNull LifecycleOwner owner, final @NonNull Observer<? super List<ContactModel>> observer) {
         mContactList.observe(owner, observer);
     }
 
-    public List<ContactModel> getContactModels() {
-        return mContactList.getValue();
-    }
-
+    /**
+     * Handles the errors
+     * @param error Error handler
+     */
     private void handleError(final VolleyError error) {
         Log.e("CONNECTION ERROR", error.getLocalizedMessage());
         throw new IllegalStateException(error.getMessage());
     }
 
+    /**
+     * Handles the result
+     * @param result the result's object
+     */
     private void handleResult(final JSONObject result) {
-        IntFunction<String> getString =
+        final IntFunction<String> getString =
                 getApplication().getResources()::getString;
 
         try {
@@ -80,7 +98,7 @@ public class ContactsListViewModel extends AndroidViewModel {
                                             R.string.keys_json_contact_lastname)));
 
                     if (!mContactIDs.contains(contact.getId())) {
-                        mContactList.getValue().add(contact);
+                        Objects.requireNonNull(mContactList.getValue()).add(contact);
                         mContactIDs.add(contact.getId());
                     }
                 }
@@ -95,8 +113,12 @@ public class ContactsListViewModel extends AndroidViewModel {
         mContactList.setValue(mContactList.getValue());
     }
 
+    /**
+     * Connects and retrieve contact data
+     * @param jwt Gets the JWT key
+     */
     public void connectGet(final String jwt) {
-        String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
+        final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
 
         final Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.GET,

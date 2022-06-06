@@ -24,6 +24,7 @@ import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingsB
 
 public class SettingsFragment extends Fragment {
 
+    // The Fragment binding
     private FragmentSettingsBinding binding;
 
     @Override
@@ -61,6 +62,11 @@ public class SettingsFragment extends Fragment {
         binding.username.setText(email);
     }
 
+    /**
+     * Get the user's night mode preference.
+     * @param compoundButton Button's object
+     * @param b Whether the button is switched or not.
+     */
     private void switchNightMode(final CompoundButton compoundButton, final boolean b) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -76,6 +82,11 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    /**
+     * Get the user's weather preference.
+     * @param compoundButton Button's object
+     * @param b Whether the button is switched or not.
+     */
     private void switchWeather(final CompoundButton compoundButton, final boolean b) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();

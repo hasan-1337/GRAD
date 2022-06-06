@@ -14,45 +14,59 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
-import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatRecyclerViewAdapter;
-import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs.CreateChatDialogFragment;
 import edu.uw.tcss450.labose.signinandregistration.ui.contacts.contactsdialogs.AddContactDialogFragment;
+import edu.uw.tcss450.labose.signinandregistration.ui.contacts.contactsdialogs.RemoveContactDialogFragment;
 
+/**
+ * Contacts List Fragment to allow the creation of contacts.
+ */
 public class ContactsListFragment extends Fragment {
 
-    private UserViewModel mUserModel;
+    // Fragment's object
     private ContactsListViewModel mModel;
 
+    /**
+     * When the fragment is created.
+     * @param savedInstanceState Save object.
+     */
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(final @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ViewModelProvider provider = new ViewModelProvider(getActivity());
-        mUserModel = provider.get(UserViewModel.class);
+        final ViewModelProvider provider = new ViewModelProvider(getActivity());
+        final UserViewModel mUserModel = provider.get(UserViewModel.class);
         mModel = provider.get(ContactsListViewModel.class);
         mModel.connectGet(mUserModel.getmJwt());
     }
 
+    /**
+     * When the fragment is in the process of displaying.
+     * @param inflater The layout object
+     * @param container The View group object
+     * @param savedInstanceState Save Object.
+     */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_contacts, container, false);
     }
 
+    /**
+     * When the fragment is displayed.
+     * @param view The layout view.
+     * @param savedInstanceState Save Object.
+     */
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
 
         final RecyclerView rv = binding.recyclerContactlist;
 
-        ArrayList<ContactModel> arrayList = new ArrayList<ContactModel>();
+        ArrayList<ContactModel> arrayList = new ArrayList<>();
 
         // Set the adapter to hold a ref to the list.
         rv.setAdapter(new ContactsRecyclerViewAdapter(arrayList));
@@ -74,7 +88,17 @@ public class ContactsListFragment extends Fragment {
             );
 
             // Add a contact
-            Log.e("Button", "Contacts Button");
+            Log.e("Button", "Add Contacts Button");
+        });
+
+        binding.contactsRemove.setOnClickListener(v -> {
+
+            new RemoveContactDialogFragment().show(
+                    getChildFragmentManager(), RemoveContactDialogFragment.TAG
+            );
+
+            // Add a contact
+            Log.e("Button", "Remove Contacts Button");
         });
     }
 }

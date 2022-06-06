@@ -2,6 +2,10 @@ package edu.uw.tcss450.labose.signinandregistration.ui.chat;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,39 +13,42 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
 import java.util.Objects;
 
-import edu.uw.tcss450.labose.signinandregistration.MainActivityArgs;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatBinding;
 import edu.uw.tcss450.labose.signinandregistration.model.UserViewModel;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs.AddChatMemberDialogFragment;
-import edu.uw.tcss450.labose.signinandregistration.ui.chatlist.chatlistdialogs.CreateChatDialogFragment;
+import edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs.RemoveChatMemberDialogFragment;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Chat Fragment to allow the creation of chatting.
  */
 public class ChatFragment extends Fragment {
 
-    //The chat ID for "global" chat
-//    private static final int HARD_CODED_CHAT_ID = 1;
-
+    // Room ID
     private int mChatID;
+
+    // Chat Model class
     private ChatViewModel mChatModel;
+
+    // User View Model class
     private UserViewModel mUserModel;
+
+    // Chat Sending Class
     private ChatSendViewModel mSendModel;
 
+    /**
+     * Constructor
+     */
     public ChatFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * When the fragment is created.
+     * @param savedInstanceState Save object.
+     */
     @Override
     public void onCreate(final @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +63,23 @@ public class ChatFragment extends Fragment {
         mSendModel = provider.get(ChatSendViewModel.class);
     }
 
+    /**
+     * When the fragment is in the process of displaying.
+     * @param inflater The layout object
+     * @param container The View group object
+     * @param savedInstanceState Save Object.
+     */
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
 
+    /**
+     * When the fragment is displayed.
+     * @param view The layout view.
+     * @param savedInstanceState Save Object.
+     */
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
@@ -91,7 +109,7 @@ public class ChatFragment extends Fragment {
                     Objects.requireNonNull(rv.getAdapter()).notifyDataSetChanged();
                     rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
                     binding.swipeContainer.setRefreshing(false);
-                    mChatModel.getNextMessages(mChatID, mUserModel.getmJwt());
+                    //mChatModel.getNextMessages(mChatID, mUserModel.getmJwt());
                 });
         //Send button was clicked. Send the message via the SendViewModel
         binding.buttonSend.setOnClickListener(button -> mSendModel.sendMessage(mChatID,
@@ -107,7 +125,16 @@ public class ChatFragment extends Fragment {
                     getChildFragmentManager(), AddChatMemberDialogFragment.TAG
             );
 
-            Log.e("Button", "Chat Button");
+            Log.e("Button", "Add Chat Member Button");
+        });
+
+        binding.chatRemoveContacts.setOnClickListener(v -> {
+
+            new RemoveChatMemberDialogFragment().show(
+                    getChildFragmentManager(), RemoveChatMemberDialogFragment.TAG
+            );
+
+            Log.e("Button", "Remove Chat Member Button");
         });
     }
 }

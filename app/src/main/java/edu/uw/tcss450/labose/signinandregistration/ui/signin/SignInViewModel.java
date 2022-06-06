@@ -26,19 +26,32 @@ import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
 public class SignInViewModel extends AndroidViewModel {
 
+    // Live data handler
     private final MutableLiveData<JSONObject> mResponse;
 
-    public SignInViewModel(@NonNull Application application) {
+    /**
+     * Constructor
+     * @param application The application
+     */
+    public SignInViewModel(final @NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
+    /**
+     * Helper to abstract the navigation to the Activity past Authentication.
+     * @param owner owner
+     * @param observer observer
+     */
+    public void addResponseObserver(final @NonNull LifecycleOwner owner, final @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Handles the errors
+     * @param error Error handler
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
@@ -62,6 +75,12 @@ public class SignInViewModel extends AndroidViewModel {
             }
         }
     }
+
+    /**
+     * Connect to the server
+     * @param name users name
+     * @param password the JSON Web Token supplied by the server
+     */
     public void connect(final String name, final String password) {
         final String url = "https://team-2-tcss450-webservice.herokuapp.com/auth";
         final Request<JSONObject> request = new JsonObjectRequest(
@@ -90,5 +109,4 @@ public class SignInViewModel extends AndroidViewModel {
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
     }
-
 }

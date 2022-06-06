@@ -7,6 +7,9 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 
+/**
+ * The Model used for the chat classes.
+ */
 public class ChatMessage implements Serializable {
 
     private final int mMessageId;
@@ -14,6 +17,13 @@ public class ChatMessage implements Serializable {
     private final String mSender;
     private final String mTimeStamp;
 
+    /**
+     * Constructor
+     * @param messageId Message ID
+     * @param message Message
+     * @param sender Sender
+     * @param timeStamp Time
+     */
     public ChatMessage(int messageId, String message, String sender, String timeStamp) {
         mMessageId = messageId;
         mMessage = message;

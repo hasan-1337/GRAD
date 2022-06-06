@@ -28,8 +28,12 @@ import java.util.Objects;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
+/**
+ * The Chat View Model class to handle the background.
+ */
 public class ChatViewModel extends AndroidViewModel {
 
+    // Message counter.
     private static int messagecount;
 
     /**
@@ -39,6 +43,10 @@ public class ChatViewModel extends AndroidViewModel {
      */
     private final Map<Integer, MutableLiveData<List<ChatMessage>>> mMessages;
 
+    /**
+     * Constructor
+     * @param application Application
+     */
     public ChatViewModel(final @NonNull Application application) {
         super(application);
         mMessages = new HashMap<>();
@@ -147,6 +155,10 @@ public class ChatViewModel extends AndroidViewModel {
         getOrCreateMapEntry(chatId).setValue(list);
     }
 
+    /**
+     * Handles the result
+     * @param response the result's object
+     */
     private void handelSuccess(final JSONObject response) {
         List<ChatMessage> list;
         if (!response.has("chatId")) {
@@ -185,6 +197,10 @@ public class ChatViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Handles the result for updated messages
+     * @param response the result's object
+     */
     private void handelSuccess2(final JSONObject response) {
         List<ChatMessage> list;
         if (!response.has("chatId")) {
@@ -220,6 +236,10 @@ public class ChatViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Handles the errors
+     * @param error Error handler
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());

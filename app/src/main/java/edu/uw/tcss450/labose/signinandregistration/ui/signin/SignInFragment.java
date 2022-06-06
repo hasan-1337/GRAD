@@ -36,13 +36,24 @@ import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
  */
 public class SignInFragment extends Fragment {
 
+    // The Fragment's binding
     private FragmentSignBinding binding;
+
+    // The View model class object
     private SignInViewModel mSignInModel;
+
+    // The pushy token class object
     private PushyTokenViewModel mPushyTokenViewModel;
+
+    // The User View Model class object
     private UserViewModel mUserViewModel;
 
+    // Email checker
     private final PasswordValidator mEmailValidator = checkPwdLength(2).and(checkExcludeWhiteSpace()).and(checkPwdSpecialChar("@"));
+
+    // Password checker
     private final PasswordValidator mPassWordValidator = checkPwdLength(1).and(checkExcludeWhiteSpace());
+
 
     public SignInFragment() {
         // Required empty public constructor

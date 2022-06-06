@@ -84,19 +84,35 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void goContacts(final View view) {
+    /**
+     * Navigate to contacts page.
+     * @param view View for the fragment
+     */
+    private void goContacts(final View view) {
         ((BottomNavigationView) getActivity().findViewById(R.id.nav_view)).setSelectedItemId(R.id.navigation_contacts);
     }
 
-    public void goChat(final View view) {
+    /**
+     * Navigate to chat page.
+     * @param view View for the fragment
+     */
+    private void goChat(final View view) {
         ((BottomNavigationView) getActivity().findViewById(R.id.nav_view)).setSelectedItemId(R.id.navigation_chatlist);
     }
 
-    public void goSetting(final View view) {
+    /**
+     * Navigate to settings page.
+     * @param view View for the fragment
+     */
+    private void goSetting(final View view) {
         startActivity(new Intent(getActivity(), SettingsActivity.class));
     }
 
-    public void goWeather(final View view) {
+    /**
+     * Navigate to weather page.
+     * @param view View for the fragment
+     */
+    private void goWeather(final View view) {
         ((BottomNavigationView) getActivity().findViewById(R.id.nav_view)).setSelectedItemId(R.id.navigation_weather);
     }
 }

@@ -2,12 +2,13 @@ package edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.util.Objects;
 
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentAddChatMemberDialogBinding;
@@ -38,8 +39,7 @@ public class AddChatMemberDialogFragment extends DialogFragment {
                 mBinding.joinChatId.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
-                        edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs
-                                .AddChatMemberDialogFragment.this.getDialog().cancel());
+                        Objects.requireNonNull(AddChatMemberDialogFragment.this.getDialog()).cancel());
 
         return builder.create();
     }

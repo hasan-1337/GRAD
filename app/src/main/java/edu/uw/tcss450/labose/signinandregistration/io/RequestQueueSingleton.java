@@ -1,6 +1,7 @@
 package edu.uw.tcss450.labose.signinandregistration.io;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -12,7 +13,9 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 public class RequestQueueSingleton {
+    @SuppressLint("StaticFieldLeak")
     private static RequestQueueSingleton instance;
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
 
     private RequestQueue mRequestQueue;
@@ -25,7 +28,7 @@ public class RequestQueueSingleton {
         mImageLoader = new ImageLoader(mRequestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
-                            cache = new LruCache<String, Bitmap>(20);
+                            cache = new LruCache<>(20);
 
                     @Override
                     public Bitmap getBitmap(String url) {

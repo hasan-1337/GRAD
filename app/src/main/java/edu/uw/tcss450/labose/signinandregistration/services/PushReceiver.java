@@ -21,11 +21,22 @@ import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
 import me.pushy.sdk.Pushy;
 
+/**
+ * Pushy service receiver class.
+ */
 public class PushReceiver extends BroadcastReceiver {
 
+    // Message from pushy
     public static final String RECEIVED_NEW_MESSAGE = "new message from pushy";
+
+    // Channel ID
     private static final String CHANNEL_ID = "1";
 
+    /**
+     * On Receiver
+     * @param context Context
+     * @param intent Intent
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -38,8 +49,8 @@ public class PushReceiver extends BroadcastReceiver {
         //So perform logic/routing based on the "type"
         //feel free to change the key or type of values.
         String typeOfMessage = intent.getStringExtra("type");
-        ChatMessage message = null;
-        int chatId = -1;
+        ChatMessage message;
+        int chatId;
         try {
             message = ChatMessage.createFromJsonString(intent.getStringExtra("message"));
             chatId = intent.getIntExtra("chatid", -1);

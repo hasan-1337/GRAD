@@ -44,31 +44,53 @@ import edu.uw.tcss450.labose.signinandregistration.services.PushReceiver;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatMessage;
 import edu.uw.tcss450.labose.signinandregistration.ui.chat.ChatViewModel;
 
+/**
+ * The Main app's activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    // Navigation object
     private AppBarConfiguration mAppBarConfiguration;
+
+    // Binding for the Main activity.
     private ActivityMainBinding binding;
+
+    // Message receiver
     private MainPushMessageReceiver mPushMessageReceiver;
+
+    // Message counter
     private NewMessageCountViewModel mNewMessageModel;
+
+    // For Notifications
     private NotificationManagerCompat notificationManager;
 
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
      * than this value.
      */
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+
     // A constant int for the permissions request code. Must be a 16 bit number
     private static final int MY_PERMISSIONS_LOCATIONS = 8414;
+
+    // Location for weather.
     private com.google.android.gms.location.LocationRequest mLocationRequest;
+
     //Use a FusedLocationProviderClient to request the location
     private FusedLocationProviderClient mFusedLocationClient;
+
     //The ViewModel that will store the current location
     private LocationViewModel mLocationModel;
 
+    /**
+     * On the activity creation.
+     * @param savedInstanceState Object of the saves.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 mNewMessageModel.reset();
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
-                //notifyThis("GRAD", "New chat message received.");
             } else if (destination.getId() == R.id.navigation_contacts || destination.getId() == R.id.navigation_weather) {
                 Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -131,8 +152,13 @@ public class MainActivity extends AppCompatActivity {
         createLocationRequest();
     }
 
+    /**
+     * Send a notification to the user.
+     * @param title The Notification Title
+     * @param message Notification message
+     */
     public void notifyThis(final String title, final String message) {
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+        final Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle(title)
@@ -167,6 +193,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Options Menu
+     * @param menu Menu object.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);

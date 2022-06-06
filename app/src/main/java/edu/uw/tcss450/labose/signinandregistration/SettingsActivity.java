@@ -8,8 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
-import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentSettingsBinding;
-
+/**
+ * Setting Activity
+ */
 public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {

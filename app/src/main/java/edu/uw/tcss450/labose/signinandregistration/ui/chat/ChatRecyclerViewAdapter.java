@@ -28,43 +28,82 @@ import java.util.Objects;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentChatMessageBinding;
 
+/**
+ * Chat Recycler View Adapter class for displaying the chats.
+ */
 public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerViewAdapter.MessageViewHolder> {
 
+    // List of messages object
     private final List<ChatMessage> mMessages;
+
+    // User's email
     private final String mEmail;
 
+    /**
+     * Constructor
+     * @param messages The messages object
+     * @param email The email given
+     */
     public ChatRecyclerViewAdapter(List<ChatMessage> messages, String email) {
         this.mMessages = messages;
         mEmail = email;
     }
 
+    /**
+     * When the view holder is created
+     * @param parent Parent
+     * @param viewType Type
+     */
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(final @NonNull ViewGroup parent, final int viewType) {
         return new MessageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_chat_message, parent, false));
     }
 
+    /**
+     * When the view is binded
+     * @param holder Holder
+     * @param position Position of the chat list
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(final @NonNull MessageViewHolder holder, final int position) {
         holder.setMessage(mMessages.get(position));
     }
 
+    /**
+     * Returns the amount of contacts
+     */
     @Override
     public int getItemCount() {
         return mMessages.size();
     }
 
+    /**
+     * Class for the message view holder
+     */
     class MessageViewHolder extends RecyclerView.ViewHolder {
+
+        // View
         private final View mView;
+
+        // Chat binding
         private final FragmentChatMessageBinding binding;
 
+        /**
+         * Constructor
+         * @param view The Fragment's view
+         */
         public MessageViewHolder(final @NonNull View view) {
             super(view);
             mView = view;
             binding = FragmentChatMessageBinding.bind(view);
         }
 
+        /**
+         * Setting the chat message.
+         * @param message The chat message object
+         */
         @RequiresApi(api = Build.VERSION_CODES.O)
         @SuppressLint({"SetTextI18n", "ResourceAsColor"})
         void setMessage(final ChatMessage message) {

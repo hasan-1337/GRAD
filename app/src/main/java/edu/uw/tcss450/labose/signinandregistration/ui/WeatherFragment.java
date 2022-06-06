@@ -40,17 +40,32 @@ import edu.uw.tcss450.labose.signinandregistration.databinding.FragmentWeatherBi
 import edu.uw.tcss450.labose.signinandregistration.model.LocationViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Weather fragment to retrieve forecast from a city/zipcode/coordinates
  */
 public class WeatherFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
+    // Binding for the fragment
     private FragmentWeatherBinding mBinding;
+
+    // Map object
     private GoogleMap mMap;
+
+    // C or F
     private boolean temperature;
+
+    // TextView for hourly forecast
     private static String hourly;
+
+    // TextView for current forecast
     private static String current;
+
+    // TextView for daily forecast
     private static String daily;
+
+    // Coordinates for the map
     private static LatLng coordinates;
+
+    // Formatter for weather
     private static final DecimalFormat df = new DecimalFormat("#.#");
 
     @Override
@@ -76,6 +91,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         mapFragment.getMapAsync(this);
     }
 
+    /**
+     * Get the weather forecast when the button is clicked.
+     * @param view View for the fragment.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getWeatherDetails(final View view) {
         final String city = mBinding.etCity.getText().toString().trim();
@@ -111,11 +130,17 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         }
     }
 
+    /**
+     * Check if user has F or C setting on.
+     */
     private void checkPreference() {
         final SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
         temperature = sharedPreferences.getBoolean("isFahrenheitOn", true);
     }
 
+    /**
+     * Convert the temperature from F to C.
+     */
     private double getTemp(final double temp) {
         if (!temperature) {
             return (temp - 32) / 1.8;
@@ -123,6 +148,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         return temp;
     }
 
+    /**
+     * Get current weather forecast
+     * @param url The server's to retrieve the information from.
+     */
     private void getWeatherCurrent(final String url) {
         // Resend the request to retrieve the current forecast.
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -158,6 +187,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Get hourly weather forecast
+     * @param url The server's to retrieve the information from.
+     */
     private void getWeatherHourly(final String url) {
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
             final StringBuilder output = new StringBuilder();
@@ -191,6 +224,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Get daily weather forecast
+     * @param url The server's to retrieve the information from.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getWeatherDaily(final String url) {
         final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, response -> {
@@ -223,6 +260,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * When the map is clicked.
+     * @param latLng The map's coordinates
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onMapClick(final @NonNull LatLng latLng) {
@@ -233,6 +274,10 @@ public class WeatherFragment extends Fragment implements OnMapReadyCallback, Goo
         getWeatherDaily("https://api.weatherbit.io/v2.0/forecast/daily?lat=" + latLng.latitude + "&lon=" + latLng.longitude + "&days=11&units=I&key=51500e0f085741f591dc0356d9a03ff4");
     }
 
+    /**
+     * When the map is loaded.
+     * @param googleMap The map's object.
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingPermission")
     @Override

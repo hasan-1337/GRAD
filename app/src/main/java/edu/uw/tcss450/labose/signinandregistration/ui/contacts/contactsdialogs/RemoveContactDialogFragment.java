@@ -37,7 +37,8 @@ public class RemoveContactDialogFragment extends DialogFragment {
 
         builder.setView(mBinding.getRoot().getRootView());
         builder.setPositiveButton(R.string.confirm_new_chat, (dialog, id) -> mModel.connectDelete(mUserModel.getmJwt(),
-                mBinding.removeContactId.getText().toString()));
+                mBinding.removeContactId.getText().toString(),
+                mBinding.removeContactUser.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
                         Objects.requireNonNull(RemoveContactDialogFragment.this.getDialog()).cancel());

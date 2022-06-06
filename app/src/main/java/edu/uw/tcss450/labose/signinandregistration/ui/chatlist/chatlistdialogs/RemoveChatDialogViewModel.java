@@ -39,9 +39,10 @@ public class RemoveChatDialogViewModel extends AndroidViewModel {
         final JSONObject body = new JSONObject();
 
         try {
-            body.put("chatId", Integer.parseInt(chatID));
-        } catch (final JSONException e) {
-            e.printStackTrace();
+            body.put("ChatID", Integer.parseInt(chatID));
+            //body.put("")
+        } catch (final JSONException | NumberFormatException e) {
+            return;
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

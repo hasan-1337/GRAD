@@ -33,15 +33,22 @@ import edu.uw.tcss450.labose.signinandregistration.util.PasswordValidator;
  * A simple {@link Fragment} subclass.
  */
 public class RegistrationFragment extends Fragment {
+
+    // Fragment Binding
     private FragmentRegistrationBinding binding;
+
+    // Registration View model object.
     private RegistrationViewModel mRegisterModel;
 
+    // Name checker
     private final PasswordValidator mNameValidator = checkPwdLength(1);
 
+    // Email checker
     private final PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
 
+    // Password checker
     private final PasswordValidator mPassWordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.editPassword2.getText().toString()))
                     .and(checkPwdLength(7))
@@ -83,6 +90,9 @@ public class RegistrationFragment extends Fragment {
         validateFirst();
     }
 
+    /**
+     * Check first name
+     */
     private void validateFirst() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editFirst.getText().toString().trim()),
@@ -90,6 +100,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editFirst.setError("Please enter a first name."));
     }
 
+    /**
+     * Check last name
+     */
     private void validateLast() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editLast.getText().toString().trim()),
@@ -97,6 +110,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editLast.setError("Please enter a last name."));
     }
 
+    /**
+     * Check email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -104,6 +120,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editEmail.setError("Please enter a valid Email address."));
     }
 
+    /**
+     * Check if the passwords match
+     */
     private void validatePasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
@@ -115,6 +134,9 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editPassword1.setError("Passwords must match."));
     }
 
+    /**
+     * Check email
+     */
     private void validatePassword() {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(binding.editPassword1.getText().toString()),
@@ -122,17 +144,20 @@ public class RegistrationFragment extends Fragment {
                 result -> binding.editPassword1.setError("Please enter a valid Password."));
     }
 
+    /**
+     * Verify with the server
+     */
     private void verifyAuthWithServer() {
         mRegisterModel.connect(
                 binding.editFirst.getText().toString(),
                 binding.editLast.getText().toString(),
                 binding.editEmail.getText().toString(),
                 binding.editPassword1.getText().toString());
-        //This is an Asynchronous call. No statements after should rely on the
-        //result of connect().
-
     }
 
+    /**
+     * Auto login
+     */
     private void navigateToLogin() {
         edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.ActionRegistrationToFragmentSign directions =
                 edu.uw.tcss450.labose.signinandregistration.ui.register.RegistrationFragmentDirections.actionRegistrationToFragmentSign();

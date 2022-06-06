@@ -26,6 +26,19 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="@string/create_chat_id"
+        android:hint="Chat Id"
+        android:autofillHints="" />
+    <EditText
+        android:id="@+id/join_chat_user"
+        android:inputType="textPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/primaryLightColor"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:hint="Username"
         android:autofillHints="" />
 </LinearLayout>
