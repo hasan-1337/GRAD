@@ -1,6 +1,9 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.chat;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -22,7 +25,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import edu.uw.tcss450.labose.signinandregistration.MainActivity;
 import edu.uw.tcss450.labose.signinandregistration.R;
+import edu.uw.tcss450.labose.signinandregistration.SettingsActivity;
 import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
 public class ChatSendViewModel extends AndroidViewModel {
@@ -62,7 +67,6 @@ public class ChatSendViewModel extends AndroidViewModel {
         request.setRetryPolicy(new DefaultRetryPolicy(10_000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         //Instantiate the RequestQueue and add the request to the queue
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext()).addToRequestQueue(request);
-
     }
 
     private void handleError(final VolleyError error) {

@@ -1,5 +1,6 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.chat;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -37,7 +38,6 @@ public class ChatFragment extends Fragment {
     private UserViewModel mUserModel;
     private ChatSendViewModel mSendModel;
 
-
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -62,6 +62,7 @@ public class ChatFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -87,14 +88,18 @@ public class ChatFragment extends Fragment {
                      * solution for when the keyboard is on the screen.
                      */
                     //inform the RV that the underlying list has (possibly) changed
-                    rv.getAdapter().notifyDataSetChanged();
+                    Objects.requireNonNull(rv.getAdapter()).notifyDataSetChanged();
                     rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
                     binding.swipeContainer.setRefreshing(false);
+                    mChatModel.getNextMessages(mChatID, mUserModel.getmJwt());
                 });
         //Send button was clicked. Send the message via the SendViewModel
-        binding.buttonSend.setOnClickListener(button -> mSendModel.sendMessage(mChatID, mUserModel.getmJwt(), binding.editMessage.getText().toString()));
-//when we get the response back from the server, clear the edittext
+        binding.buttonSend.setOnClickListener(button -> mSendModel.sendMessage(mChatID,
+                mUserModel.getmJwt(),
+                binding.editMessage.getText().toString()));
+        //when we get the response back from the server, clear the edittext
         mSendModel.addResponseObserver(getViewLifecycleOwner(), response -> binding.editMessage.setText(""));
+        mSendModel.addResponseObserver(getViewLifecycleOwner(), response -> mChatModel.getNextMessages(mChatID, mUserModel.getmJwt()));
 
         binding.chatAddContacts.setOnClickListener(v -> {
 

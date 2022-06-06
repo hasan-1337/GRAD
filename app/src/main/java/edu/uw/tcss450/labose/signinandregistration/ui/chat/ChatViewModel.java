@@ -28,7 +28,9 @@ import java.util.Objects;
 import edu.uw.tcss450.labose.signinandregistration.R;
 import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
-public class ChatViewModel  extends AndroidViewModel {
+public class ChatViewModel extends AndroidViewModel {
+
+    public static int messagecount;
 
     /**
      * A Map of Lists of Chat Messages.
@@ -116,9 +118,9 @@ public class ChatViewModel  extends AndroidViewModel {
      * @param jwt the users signed JWT
      */
     public void getNextMessages(final int chatId, final String jwt) {
-        final String url = getApplication().getResources().getString(R.string.base_url_service) + "messages/" + chatId + "/" + mMessages.get(chatId).getValue().get(0).getMessageId();
-
-        final Request<JSONObject> request = new JsonObjectRequest(Request.Method.GET, url, null, this::handelSuccess, this::handleError) {
+        //final String url = getApplication().getResources().getString(R.string.base_url_service) + "messages/" + chatId + "/" + mMessages.get(chatId).getValue().get(0).getMessageId();
+        String url = getApplication().getResources().getString(R.string.base_url_service) + "messages/" + chatId;
+        final Request<JSONObject> request = new JsonObjectRequest(Request.Method.GET, url, null, this::handelSuccess2, this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
                 final Map<String, String> headers = new HashMap<>();
@@ -136,8 +138,8 @@ public class ChatViewModel  extends AndroidViewModel {
     /**
      * When a chat message is received externally to this ViewModel, add it
      * with this method.
-     * @param chatId
-     * @param message
+     * @param chatId Id
+     * @param message Message
      */
     public void addMessage(final int chatId, final ChatMessage message) {
         List<ChatMessage> list = getMessageListByChatId(chatId);
@@ -162,6 +164,7 @@ public class ChatViewModel  extends AndroidViewModel {
                         message.getString("email"),
                         message.getString("timestamp")
                 );
+
                 if (!list.contains(cMessage)) {
                     // don't add a duplicate
                     list.add(0, cMessage);
@@ -172,6 +175,43 @@ public class ChatViewModel  extends AndroidViewModel {
                 }
 
             }
+
+            messagecount = messages.length();
+            //inform observers of the change (setValue)
+            getOrCreateMapEntry(response.getInt("chatId")).setValue(list);
+        } catch (final JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
+    }
+
+    private void handelSuccess2(final JSONObject response) {
+        List<ChatMessage> list;
+        if (!response.has("chatId")) {
+            throw new IllegalStateException("Unexpected response in ChatViewModel: " + response);
+        }
+        try {
+            list = getMessageListByChatId(response.getInt("chatId"));
+            final JSONArray messages = response.getJSONArray("rows");
+
+            for(int i = messagecount - messages.length(); i >= 0; i--) {
+                JSONObject message = messages.getJSONObject(i);
+                ChatMessage cMessage = new ChatMessage(
+                        message.getInt("messageid"),
+                        message.getString("message"),
+                        message.getString("email"),
+                        message.getString("timestamp")
+                );
+                if (!list.contains(cMessage)) {
+                    // don't add a duplicate
+                    list.add(list.size(), cMessage);
+                } else {
+                    // this shouldn't happen but could with the asynchronous
+                    // nature of the application
+                    Log.wtf("Chat message already received", "Or duplicate id:" + cMessage.getMessageId());
+                }
+            }
+            messagecount = messages.length();
             //inform observers of the change (setValue)
             getOrCreateMapEntry(response.getInt("chatId")).setValue(list);
         } catch (final JSONException e) {
