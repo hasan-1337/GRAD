@@ -34,13 +34,8 @@ public class AddChatMemberDialogFragment extends DialogFragment {
         mBinding = FragmentAddChatMemberDialogBinding.inflate(inflater);
 
         builder.setView(mBinding.getRoot().getRootView());
-        builder.setPositiveButton(R.string.confirm_new_chat, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                mModel.connectPut(mUserModel.getmJwt(),
-                        mBinding.joinChatId.getText().toString());
-            }
-        });
+        builder.setPositiveButton(R.string.confirm_new_chat, (dialog, id) -> mModel.connectPut(mUserModel.getmJwt(),
+                mBinding.joinChatId.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
                         edu.uw.tcss450.labose.signinandregistration.ui.chat.chatdialogs

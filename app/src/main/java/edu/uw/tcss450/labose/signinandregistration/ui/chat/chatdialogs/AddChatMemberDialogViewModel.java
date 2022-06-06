@@ -39,9 +39,9 @@ public class AddChatMemberDialogViewModel extends AndroidViewModel {
         final JSONObject body = new JSONObject();
 
         try {
-            body.put("chatId", Integer.parseInt(chatID));
-        } catch (final JSONException | NumberFormatException e) {
-            return;
+            body.put("chatId", chatID);
+        } catch (final JSONException e) {
+            e.printStackTrace();
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

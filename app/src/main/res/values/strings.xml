@@ -33,7 +33,7 @@
     <string name="keys_json_contact_data">data</string>
     <string name="keys_json_contact_name">name</string>
     <string name="keys_json_contact_email">email</string>
-    <string name="keys_json_contact_id">id</string>
+    <string name="keys_json_contact_id">memberid</string>
 
     <string name="keys_json_chat_rowcount">rowCount</string>
     <string name="keys_json_chat_rows">rows</string>
@@ -64,17 +64,18 @@
     <string name="create_chat_name">Chat Name</string>
     <string name="confirm_new_chat">Create New Chat</string>
     <string name="cancel">Cancel</string>
-    <string name="create_chat_id">Chat ID</string>
+    <string name="create_chat_id">User\'s Email</string>
     <string name="join_chat">Join a chat</string>
     <string name="add_contact_id">Contact ID</string>
     <string name="contact_fname">Contact First Name</string>
     <string name="contact_lname">Contact Last Name</string>
     <string name="contact_email">Contact Email</string>
-    <string name="contact_uid">Contact User ID</string>
+    <string name="contact_username">Contact Username</string>
     <string name="add_contact">Add a new contact</string>
     <string name="leave_chat">Leave a Chat</string>
     <string name="user_email">User Email</string>
     <string name="remove_contact">Remove a Contact</string>
     <string name="remove_chat">Remove a Chat</string>
-
+    <string name="keys_json_contact_firstname">firstname</string>
+    <string name="keys_json_contact_lastname">lastname</string>
 </resources>

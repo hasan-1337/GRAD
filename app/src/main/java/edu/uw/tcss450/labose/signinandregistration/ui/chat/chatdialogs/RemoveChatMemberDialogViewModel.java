@@ -69,5 +69,4 @@ public class RemoveChatMemberDialogViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
-
 }

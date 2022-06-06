@@ -34,20 +34,17 @@ public class AddContactDialogViewModel extends AndroidViewModel {
         throw new IllegalStateException(error.getMessage());
     }
 
-    public void connectPost(final String jwt, final String contactID, final String contactFName,
-                            final String contactLName, final String contactEmail,
-                            final String chatID) {
+    public void connectPost(final String jwt, final String contactFName, final String contactLName, final String contactusername, final String contactEmail) {
         final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/contacts";
         final JSONObject body = new JSONObject();
 
         try {
-            body.put("contactid", Integer.parseInt(contactID));
-            body.put("firstname", contactFName);
-            body.put("lastname", contactLName);
-            body.put("email", contactEmail);
-            body.put("chatid", Integer.parseInt(chatID));
-        } catch (final JSONException | NumberFormatException e) {
-            return;
+            body.put("FirstName", contactFName);
+            body.put("LastName", contactLName);
+            body.put("Username", contactusername);
+            body.put("Email", contactEmail);
+        } catch (final JSONException e) {
+            e.printStackTrace();
         }
 
         final Request<JSONObject> request = new JsonObjectRequest(

@@ -35,13 +35,12 @@ public class CreateChatDialogViewModel extends AndroidViewModel {
         throw new IllegalStateException(error.getMessage());
     }
 
-    public void connectPost(final String jwt, final String chatName, final String chatID) {
+    public void connectPost(final String jwt, final String chatName) {
         final String url = "https://team-2-tcss450-server-m-c.herokuapp.com/chats";
         final JSONObject body = new JSONObject();
 
         try {
             body.put("name", chatName);
-            body.put("chatID", Integer.parseInt(chatID));
         } catch (final JSONException e) {
             e.printStackTrace();
         }

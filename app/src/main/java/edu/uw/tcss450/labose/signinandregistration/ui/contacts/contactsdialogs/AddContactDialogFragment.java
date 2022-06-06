@@ -39,11 +39,10 @@ public class AddContactDialogFragment extends DialogFragment {
 
         builder.setView(mBinding.getRoot().getRootView());
         builder.setPositiveButton(R.string.confirm_new_chat, (dialog, id) -> mModel.connectPost(mUserModel.getmJwt(),
-                mBinding.newContactId.getText().toString(),
                 mBinding.newContactFirstname.getText().toString(),
                 mBinding.newContactLastname.getText().toString(),
-                mBinding.newContactEmail.getText().toString(),
-                mBinding.newContactUserId.getText().toString()));
+                mBinding.newContactUser.getText().toString(),
+                mBinding.newContactEmail.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
                         Objects.requireNonNull(AddContactDialogFragment.this.getDialog()).cancel());

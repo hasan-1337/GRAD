@@ -58,9 +58,9 @@ public class ContactsListViewModel extends AndroidViewModel {
                 getApplication().getResources()::getString;
 
         try {
-            if (result.has(getString.apply(R.string.keys_json_contact_response))) {
+            if (result.has(getString.apply(R.string.keys_json_chat_rows))) {
                 JSONArray data = result.getJSONArray(
-                        getString.apply(R.string.keys_json_contact_response));
+                        getString.apply(R.string.keys_json_chat_rows));
                 for (int i = 0; i < data.length(); i++) {
                     JSONObject jsonContact = data.getJSONObject(i);
                     ContactModel contact = new ContactModel(
@@ -74,7 +74,11 @@ public class ContactsListViewModel extends AndroidViewModel {
                     contact.setName(
                             jsonContact.getString(
                                     getString.apply(
-                                            R.string.keys_json_contact_name)));
+                                            R.string.keys_json_contact_firstname)) + " " +
+                            jsonContact.getString(
+                                    getString.apply(
+                                            R.string.keys_json_contact_lastname)));
+
                     if (!mContactIDs.contains(contact.getId())) {
                         mContactList.getValue().add(contact);
                         mContactIDs.add(contact.getId());
@@ -89,7 +93,6 @@ public class ContactsListViewModel extends AndroidViewModel {
         }
 
         mContactList.setValue(mContactList.getValue());
-
     }
 
     public void connectGet(final String jwt) {

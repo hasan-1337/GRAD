@@ -39,8 +39,7 @@ public class CreateChatDialogFragment extends DialogFragment {
 
         builder.setView(mBinding.getRoot().getRootView());
         builder.setPositiveButton(R.string.confirm_new_chat, (dialog, id) -> mModel.connectPost(mUserModel.getmJwt(),
-                mBinding.newChatName.getText().toString(),
-                mBinding.newChatId.getText().toString()));
+                mBinding.newChatName.getText().toString()));
         builder.setNegativeButton(R.string.cancel,
                 (dialog, id) ->
                         Objects.requireNonNull(CreateChatDialogFragment.this.getDialog()).cancel());
