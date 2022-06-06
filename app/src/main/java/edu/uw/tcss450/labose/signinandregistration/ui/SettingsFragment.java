@@ -44,7 +44,7 @@ public class SettingsFragment extends Fragment {
         binding.nightmode.setOnCheckedChangeListener(this::switchNightMode);
         binding.weather.setOnCheckedChangeListener(this::switchWeather);
 
-        final SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences(getString(R.string.keys_shared_prefs), Context.MODE_PRIVATE);
         final JWT jwt = new JWT(prefs.getString(getString(R.string.keys_prefs_jwt), ""));
         String email = jwt.getClaim("email").asString();
         binding.email.setText(email);
@@ -56,6 +56,8 @@ public class SettingsFragment extends Fragment {
                 break;
             }
         }
+        String name = sharedPreferences.getString("Name", "");
+        binding.name.setText(name);
         binding.username.setText(email);
     }
 

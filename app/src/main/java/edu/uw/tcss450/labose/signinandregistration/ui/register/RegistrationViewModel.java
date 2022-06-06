@@ -1,6 +1,9 @@
 package edu.uw.tcss450.labose.signinandregistration.ui.register;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -74,6 +77,10 @@ public class RegistrationViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
 
+        SharedPreferences sharedPreferences = getApplication().getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Name", first + " " + last);
+        editor.apply();
         Request<JSONObject> request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,

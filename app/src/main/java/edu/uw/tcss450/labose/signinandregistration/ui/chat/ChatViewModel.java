@@ -30,7 +30,7 @@ import edu.uw.tcss450.labose.signinandregistration.io.RequestQueueSingleton;
 
 public class ChatViewModel extends AndroidViewModel {
 
-    public static int messagecount;
+    private static int messagecount;
 
     /**
      * A Map of Lists of Chat Messages.
